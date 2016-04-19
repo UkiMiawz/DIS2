@@ -13,6 +13,7 @@ public class HelloWorldGraphical {
 
    private JButton endButton;
 
+   //constructor
    public HelloWorldGraphical(){
       prepareGUI();
       prepareEvents();
@@ -21,7 +22,8 @@ public class HelloWorldGraphical {
    public static void main(String[] args){
       HelloWorldGraphical helloWorldGraphical = new HelloWorldGraphical();     
    }
-      
+   
+   //build GUI parts
    private void prepareGUI(){
       mainFrame = new JFrame("Hello World GUI");
       mainFrame.setSize(400,500);
@@ -34,7 +36,7 @@ public class HelloWorldGraphical {
       goodDayLabel.setSize(350,100);
       mainFrame.addWindowListener(new WindowAdapter() {
          public void windowClosing(WindowEvent windowEvent){
-	        System.exit(0);
+           System.exit(0);
          }        
       });    
       languagePanel = new JPanel();
@@ -55,6 +57,7 @@ public class HelloWorldGraphical {
 
    private void prepareEvents(){
       headerLabel.setText("Choose wisely (not like anything would happen anyway)"); 
+      goodDayLabel.setText("Hari yang Indah!");
 
       JButton deutschButton = new JButton("Deutsch");
       JButton englishButton = new JButton("English");
@@ -66,10 +69,10 @@ public class HelloWorldGraphical {
       englishButton.setActionCommand("English");
       francaisButton.setActionCommand("Francais");
 
-      deutschButton.addActionListener(new ButtonClickListener()); 
-      englishButton.addActionListener(new ButtonClickListener()); 
-      francaisButton.addActionListener(new ButtonClickListener()); 
-      endButton.addActionListener(new ButtonClickListener());
+      deutschButton.addActionListener(new LanguageClickListener()); 
+      englishButton.addActionListener(new LanguageClickListener()); 
+      francaisButton.addActionListener(new LanguageClickListener()); 
+      endButton.addActionListener(new ExitClickListener());
 
       languagePanel.add(deutschButton);
       languagePanel.add(englishButton);
@@ -79,7 +82,7 @@ public class HelloWorldGraphical {
       mainFrame.setVisible(true);  
    }
 
-   private class ButtonClickListener implements ActionListener{
+   private class LanguageClickListener implements ActionListener{
       public void actionPerformed(ActionEvent e) {
          String command = e.getActionCommand();  
          if( command.equals( "Deutsch" ))  {
@@ -94,9 +97,16 @@ public class HelloWorldGraphical {
             endButton.setText("Terminé");
          }
          else  {
-            System.exit(0);
-         }  	
-      }		
+            goodDayLabel.setText("Invalid input");
+            endButton.setText("Invalid input");
+         }     
+      }     
+   }
+
+   private class ExitClickListener implements ActionListener{
+      public void actionPerformed(ActionEvent e){
+         System.exit(0);
+      }
    }
 
    public static void centreWindow(Window frame) {
