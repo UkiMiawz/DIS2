@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class HelloWorldGraphical {
 
@@ -33,7 +34,8 @@ public class HelloWorldGraphical {
          }        
       });    
       languagePanel = new JPanel();
-      languagePanel.setLayout(new FlowLayout());
+      languagePanel.setLayout(new GridLayout(3, 1));
+      languagePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
       mainFrame.add(headerLabel);
       mainFrame.add(languagePanel);
