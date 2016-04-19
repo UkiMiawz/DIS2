@@ -26,6 +26,7 @@ public class HelloWorldGraphical {
       mainFrame = new JFrame("Hello World GUI");
       mainFrame.setSize(400,500);
       mainFrame.setLayout(new GridLayout(4, 1));
+      mainFrame.setMinimumSize(new Dimension(400, 500));
 
       headerLabel = new JLabel("",JLabel.CENTER );
       goodDayLabel = new JLabel("",JLabel.CENTER);        
