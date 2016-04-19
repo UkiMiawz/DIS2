@@ -9,6 +9,9 @@ public class HelloWorldGraphical {
    private JLabel headerLabel;
    private JLabel goodDayLabel;
    private JPanel languagePanel;
+   private JPanel footerPanel;
+
+   private JButton endButton;
 
    public HelloWorldGraphical(){
       prepareGUI();
@@ -37,9 +40,14 @@ public class HelloWorldGraphical {
       languagePanel.setLayout(new GridLayout(3, 1));
       languagePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
+      footerPanel = new JPanel();
+      footerPanel.setLayout(new GridLayout(3, 1));
+      footerPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
       mainFrame.add(headerLabel);
       mainFrame.add(languagePanel);
       mainFrame.add(goodDayLabel);
+      mainFrame.add(footerPanel);
       mainFrame.setVisible(true); 
       centreWindow(mainFrame); 
    }
@@ -50,6 +58,8 @@ public class HelloWorldGraphical {
       JButton deutschButton = new JButton("Deutsch");
       JButton englishButton = new JButton("English");
       JButton francaisButton = new JButton("Francais");
+      
+      endButton = new JButton("End");
 
       deutschButton.setActionCommand("Deutsch");
       englishButton.setActionCommand("English");
@@ -58,10 +68,12 @@ public class HelloWorldGraphical {
       deutschButton.addActionListener(new ButtonClickListener()); 
       englishButton.addActionListener(new ButtonClickListener()); 
       francaisButton.addActionListener(new ButtonClickListener()); 
+      endButton.addActionListener(new ButtonClickListener());
 
       languagePanel.add(deutschButton);
       languagePanel.add(englishButton);
-      languagePanel.add(francaisButton);       
+      languagePanel.add(francaisButton);
+      footerPanel.add(endButton);     
 
       mainFrame.setVisible(true);  
    }
@@ -71,11 +83,14 @@ public class HelloWorldGraphical {
          String command = e.getActionCommand();  
          if( command.equals( "Deutsch" ))  {
             goodDayLabel.setText("Guten Tag!");
+            endButton.setText("Beenden");
          }
          else if( command.equals( "English" ) )  {
-            goodDayLabel.setText("Good Day!"); 
+            goodDayLabel.setText("Good Day!");
+            endButton.setText("End");
          }else if( command.equals( "Francais" ) )  {
-            goodDayLabel.setText("Bon jour!"); 
+            goodDayLabel.setText("Bonne journée!");
+            endButton.setText("Terminé");
          }
          else  {
             System.exit(0);
