@@ -25,6 +25,8 @@ public class helloworldconsole {
                     else if(name.equals("f")) {System.out.println("bonne journée!");}
                     else if(name.equals("q")){running = false; System.out.println("Quitting...");}
                     else {System.out.println("Please use correct input. Use either D or E or F or Q (it is case insensitive)");}
+
+
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
