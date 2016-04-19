@@ -21,8 +21,8 @@ public class HelloWorldGraphical {
       
    private void prepareGUI(){
       mainFrame = new JFrame("Hello World GUI");
-      mainFrame.setSize(400,400);
-      mainFrame.setLayout(new GridLayout(3, 1));
+      mainFrame.setSize(400,500);
+      mainFrame.setLayout(new GridLayout(4, 1));
 
       headerLabel = new JLabel("",JLabel.CENTER );
       goodDayLabel = new JLabel("",JLabel.CENTER);        
@@ -40,7 +40,8 @@ public class HelloWorldGraphical {
       mainFrame.add(headerLabel);
       mainFrame.add(languagePanel);
       mainFrame.add(goodDayLabel);
-      mainFrame.setVisible(true);  
+      mainFrame.setVisible(true); 
+      centreWindow(mainFrame); 
    }
 
    private void prepareEvents(){
@@ -80,5 +81,12 @@ public class HelloWorldGraphical {
             System.exit(0);
          }  	
       }		
+   }
+
+   public static void centreWindow(Window frame) {
+       Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+       int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
+       int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+       frame.setLocation(x, y);
    }
 }
