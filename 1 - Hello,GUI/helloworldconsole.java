@@ -1,6 +1,6 @@
 import java.io.Console;
 
-public class helloworldconsole {
+public class HelloWorldConsole {
 
     public static void main(String[] args) {
         Console cnsl = System.console();
