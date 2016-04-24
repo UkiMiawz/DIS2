@@ -9,18 +9,20 @@ public class helloworldconsole {
         String name = null;
         Boolean running = true;
         while (running) {
+            //list of instructions
             System.out.println("Select one of the following:");
             System.out.println("[D]eutsch");
             System.out.println("[E]nglish");
             System.out.println("[F]rancais");
             System.out.println("[Q]uit");
 
-
             try {
 
                 if (cnsl != null){
+                    //console input
                     name = cnsl.readLine().toLowerCase();
 
+                    //checking which language is chosen
                     if (name.equals("d") ) {System.out.println("Guten Tag!");}
                     else if(name.equals("e")) {System.out.println("Good day!");}
                     else if(name.equals("f")) {System.out.println("bonne journée!");}
