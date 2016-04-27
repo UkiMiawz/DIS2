@@ -1,6 +1,6 @@
 import java.io.Console;
 
-public class helloworldconsole {
+public class HelloWorldConsole{
     public static void main(String[] args) {
 
 
@@ -9,7 +9,7 @@ public class helloworldconsole {
         String name = null;
         Boolean running = true;
         while (running) {
-            //list of instructions
+            // instruction list
             System.out.println("Select one of the following:");
             System.out.println("[D]eutsch");
             System.out.println("[E]nglish");
@@ -33,6 +33,8 @@ public class helloworldconsole {
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
+
+
 
             }
 
