@@ -5,32 +5,39 @@ import de.rwth.hci.Graphics.GraphicsEventSystem;
 
 import java.awt.*;
 
-import static java.awt.Color.BLACK;
-
 public class WindowSystem extends GraphicsEventSystem{
-
+    private int screenWidth;
+    private int screenHeight;
     public  WindowSystem( int width, int height) {
-        super(width,height);}
+        super(width,height);
+        screenHeight = height;
+        screenWidth = width;}
 
 
-    protected void handlePaint() {
-        this.setColor(Color.BLACK);
-        // Your test program should display a single line from (0.2, 0.3) to
-        // (0.8, 0.7) on your “desktop”
-        this.drawLine(0.2, 0.3, 0.8, 0.7);
+
+
+
+    public void drawLine(float xs,float ys,float xe,float ye){
+        float xstart = xs*screenWidth;
+        float ystart = ys*screenHeight;
+        float xend = xe*screenWidth;
+        float yend = ye*screenHeight;
+        super.drawLine(xstart,ystart,xend,yend);
 
     }
 
-    protected void drawLine(float xs,float ys,float xe,float ye){
-        super.drawLine(xs,ys,xe,ye);
-
-    }
     public void setColor(Color col){
         super.setColor(col);
     }
 
-    public static void main(String[] args){WindowSystem windowsystem = new WindowSystem(200,200);
+
+    public void handlePaint() {
+        this.setColor(Color.RED);
+        this.drawLine(0.4f, 0.4f, 0.2f, 0.2f);}
+
+    public static void main(String[] args){WindowSystem windowsystem = new WindowSystem(500,500);
         windowsystem.handlePaint();
+
 
 
     }
