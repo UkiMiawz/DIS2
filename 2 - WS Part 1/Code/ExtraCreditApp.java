@@ -88,9 +88,8 @@ class MyPanel extends JPanel {
         if ((CURR_X2!=y)) {
 
             // The square is moving, repaint background 
-            // over the old square location. 
-            repaint(CURR_X2,CURR_Y,1,1);
-            repaint(CURR_X2-1,CURR_Y-1,1,1);
+            // over the old square location.
+            repaint(CURR_X2-1,CURR_Y-1,2,2);
 
             // Update coordinates.
             horizontalLine.setX2(y);
