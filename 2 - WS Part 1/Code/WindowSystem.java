@@ -1,10 +1,18 @@
 import de.rwth.hci.Graphics.GraphicsEventSystem; 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WindowSystem extends GraphicsEventSystem{
 	
 	private int windowWidth;
 	private int windowHeight;
+	private List<SimpleWindow> simpleWindows;
+	
+	private float startX;
+	private float startY;
+	private float endX;
+	private float endY;
 	
 	/*
 	 * Constructor
@@ -14,23 +22,25 @@ public class WindowSystem extends GraphicsEventSystem{
 		super(width, height);
 		windowWidth = width;
 		windowHeight = height;
-		handlePaint();
+		simpleWindows = new ArrayList<SimpleWindow>();
 	}
-
-	/*
-	 * Main class
-	 */
-	public static void main(String[] args){
-		WindowSystem windowSystem = new WindowSystem(500, 500);
+	
+	public void setLineParameters(float startX, float startY, float endX, float endY){
+		this.startX = startX;
+		this.startY = startY;
+		this.endX = endX;
+		this.endY = endY;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see de.rwth.hci.Graphics.GraphicsEventSystem#handlePaint()
 	 */
+	@Override
 	protected void handlePaint(){
-		System.out.println("Drawing with Handle Paint");
-		this.drawLine(0.5f,0.5f,0.8f,0.8f);
+		System.out.println("Drawing with Handle Paint with startx: " + startX + " starty: " + startY + 
+				" endx: " + endX + " endy " + endY);
+		this.drawLine(startX, startY, endX, endY);
 	}
 	
 	/*
@@ -49,5 +59,9 @@ public class WindowSystem extends GraphicsEventSystem{
 				" starty: " + startWindowY + " endx: " + endWindowX + " endy " + endWindowY);
 		super.setColor(Color.BLACK);
 		super.drawLine(startWindowX, startWindowY, endWindowX, endWindowY);
+	}
+	
+	public void AddNewWindow(){
+		simpleWindows.add(new SimpleWindow());
 	}
 }
