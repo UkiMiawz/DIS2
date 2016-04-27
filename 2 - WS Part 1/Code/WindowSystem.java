@@ -14,6 +14,11 @@ public class WindowSystem extends GraphicsEventSystem{
 	private float endX;
 	private float endY;
 	
+	private int startWindowX;
+	private int startWindowY;
+	private int endWindowX;
+	private int endWindowY;
+	
 	/*
 	 * Constructor
 	 */
@@ -41,6 +46,10 @@ public class WindowSystem extends GraphicsEventSystem{
 		System.out.println("Drawing with Handle Paint with startx: " + startX + " starty: " + startY + 
 				" endx: " + endX + " endy " + endY);
 		this.drawLine(startX, startY, endX, endY);
+		System.out.println("Draw line in coordinates: " + startWindowX + 
+				" starty: " + startWindowY + " endx: " + endWindowX + " endy " + endWindowY);
+		super.setColor(Color.BLACK);
+		super.drawLine(startWindowX, startWindowY, endWindowX, endWindowY);
 	}
 	
 	/*
@@ -50,15 +59,10 @@ public class WindowSystem extends GraphicsEventSystem{
 	void drawLine(float startX, float startY, float endX, float endY){
 		System.out.println("Draw line with startx: " + startX + " starty: " + startY + 
 				" endx: " + endX + " endy " + endY);
-		int startWindowX = (int)(windowWidth * startX);
-		int startWindowY = (int)(windowHeight * startY);
-		int endWindowX = (int)(windowWidth * endX);
-		int endWindowY = (int)(windowHeight * endY);
-		
-		System.out.println("Draw line in coordinates: " + startWindowX + 
-				" starty: " + startWindowY + " endx: " + endWindowX + " endy " + endWindowY);
-		super.setColor(Color.BLACK);
-		super.drawLine(startWindowX, startWindowY, endWindowX, endWindowY);
+		startWindowX = (int)(windowWidth * startX);
+		startWindowY = (int)(windowHeight * startY);
+		endWindowX = (int)(windowWidth * endX);
+		endWindowY = (int)(windowHeight * endY);
 	}
 	
 	public void AddNewWindow(){
