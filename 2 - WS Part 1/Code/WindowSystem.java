@@ -40,14 +40,14 @@ public class WindowSystem extends GraphicsEventSystem{
 	void drawLine(float startX, float startY, float endX, float endY){
 		System.out.println("Draw line with startx: " + startX + " starty: " + startY + 
 				" endx: " + endX + " endy " + endY);
-		double startWindowX = windowWidth * startX;
-		double startWindowY = windowHeight * startY;
-		double endWindowX = windowWidth * endX;
-		double endWindowY = windowHeight * endY;
+		int startWindowX = (int)(windowWidth * startX);
+		int startWindowY = (int)(windowHeight * startY);
+		int endWindowX = (int)(windowWidth * endX);
+		int endWindowY = (int)(windowHeight * endY);
 		
 		System.out.println("Draw line in coordinates: " + startWindowX + 
 				" starty: " + startWindowY + " endx: " + endWindowX + " endy " + endWindowY);
 		super.setColor(Color.BLACK);
-		super.drawLine((int)startWindowX, (int)startWindowY, (int)endWindowX, (int)endWindowY);
+		super.drawLine(startWindowX, startWindowY, endWindowX, endWindowY);
 	}
 }
