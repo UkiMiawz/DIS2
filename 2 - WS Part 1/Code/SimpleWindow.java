@@ -1,7 +1,6 @@
 public class SimpleWindow{
 
 	private int indexValue;
-	private int zValue;
 	private int yMin;
 	private int xMin;
 	private int yMax;
@@ -16,5 +15,4 @@ public class SimpleWindow{
 	public int getYMin(){ return yMin; }
 	public int getYMax(){ return yMax; }
 	public int getXMax(){ return xMax; }
-	public int getZ(){ return zValue; }
 }
