@@ -5,19 +5,24 @@ import java.util.List;
 
 public class WindowSystem extends GraphicsEventSystem{
 	
+	//window system width and height
 	private int windowWidth;
 	private int windowHeight;
+	//list of Windows in current window system
 	private List<SimpleWindow> simpleWindows;
 	
+	//parameters for drawing line in vector
 	private float startX;
 	private float startY;
 	private float endX;
 	private float endY;
-	
-	private int startWindowX;
-	private int startWindowY;
-	private int endWindowX;
-	private int endWindowY;
+
+	//line x and y start position in coordinates
+	private int startLineX;
+	private int startLineY;
+	//line x and y end position in coordinates
+	private int endLineX;
+	private int endLineY;
 	
 	/*
 	 * Constructor
@@ -27,6 +32,7 @@ public class WindowSystem extends GraphicsEventSystem{
 		super(width, height);
 		windowWidth = width;
 		windowHeight = height;
+		//instantiate new list
 		simpleWindows = new ArrayList<SimpleWindow>();
 	}
 	
@@ -59,10 +65,10 @@ public class WindowSystem extends GraphicsEventSystem{
 	void drawLine(float startX, float startY, float endX, float endY){
 		System.out.println("Draw line with startx: " + startX + " starty: " + startY + 
 				" endx: " + endX + " endy " + endY);
-		startWindowX = (int)(windowWidth * startX);
-		startWindowY = (int)(windowHeight * startY);
-		endWindowX = (int)(windowWidth * endX);
-		endWindowY = (int)(windowHeight * endY);
+		startLineX = (int)(windowWidth * startX);
+		startLineY = (int)(windowHeight * startY);
+		endLineX = (int)(windowWidth * endX);
+		endLineY = (int)(windowHeight * endY);
 	}
 	
 	public void AddNewWindow(){
