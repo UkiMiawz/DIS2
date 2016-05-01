@@ -36,6 +36,7 @@ public class WindowSystem extends GraphicsEventSystem{
 		simpleWindows = new ArrayList<SimpleWindow>();
 	}
 	
+	//set line parameters in vector
 	public void setLineParameters(float startX, float startY, float endX, float endY){
 		this.startX = startX;
 		this.startY = startY;
@@ -45,24 +46,25 @@ public class WindowSystem extends GraphicsEventSystem{
 
 	/*
 	 * (non-Javadoc)
-	 * @see de.rwth.hci.Graphics.GraphicsEventSystem#handlePaint()
+	 * override handle paint in parent
+	 * Set color and draw line using parent methods
 	 */
 	@Override
 	protected void handlePaint(){
 		System.out.println("Drawing with Handle Paint with startx: " + startX + " starty: " + startY + 
 				" endx: " + endX + " endy " + endY);
-		this.drawLine(startX, startY, endX, endY);
+		this.calculateCoordinate(startX, startY, endX, endY);
 		System.out.println("Draw line in coordinates: " + startWindowX + 
 				" starty: " + startWindowY + " endx: " + endWindowX + " endy " + endWindowY);
+		//put set color and draw line here because calling them outside handle paint gives error message
 		super.setColor(Color.BLACK);
 		super.drawLine(startWindowX, startWindowY, endWindowX, endWindowY);
 	}
 	
 	/*
 	 * Translate vector to coordinate
-	 * Draw line using parent draw line
 	 */
-	void drawLine(float startX, float startY, float endX, float endY){
+	void calculateCoordinate(float startX, float startY, float endX, float endY){
 		System.out.println("Draw line with startx: " + startX + " starty: " + startY + 
 				" endx: " + endX + " endy " + endY);
 		startLineX = (int)(windowWidth * startX);
@@ -71,6 +73,9 @@ public class WindowSystem extends GraphicsEventSystem{
 		endLineY = (int)(windowHeight * endY);
 	}
 	
+	/*
+	 * Add new simple window to window system
+	 */
 	public void AddNewWindow(){
 		simpleWindows.add(new SimpleWindow());
 	}
