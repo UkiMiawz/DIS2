@@ -21,7 +21,7 @@ public class SimpleWindow{
         this.RightBottomX = RightBottomX;
         this.RightBottomY = RightBottomY;
         this.id = UUID.randomUUID();
-        System.out.print("Hey that is your window ID"+this.id);
+        System.out.println("Hey that is your window ID "+this.id);
 
 
     }

@@ -1,7 +1,6 @@
 import de.rwth.hci.Graphics.GraphicsEventSystem;
 
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,19 +40,23 @@ public class WindowSystem extends GraphicsEventSystem{
      */
     @Override
     protected void handlePaint(){
-        //System.out.println("Draw line in coordinates: " + startLineX +
-         //       " starty: " + startLineY + " endx: " + endLineX + " endy " + endLineY);
+       // System.out.println("Draw line in coordinates: " + startLineX +
+         //      " starty: " + startLineY + " endx: " + endLineX + " endy " + endLineY);
         //put set color and draw line here because calling them outside handle paint gives error message
-        super.setColor(Color.BLACK);
 
-        System.out.print("Drawing rectangle ");
-        /*
+
+
+
+        //System.out.println("Drawing rectangle hey hey");
+
         for (Rectangle temp:rectBuffer) {
-            super.drawRect(100,100,20,20);
+            this.drawRect(100,100,20,20);
             System.out.print("rectangle");
-            super.fillRect(100,100,20,20);
-        }*/
+            this.fillRect(100,100,20,20);
+        }
     }
+
+
 
     /*
      * Translate vector to coordinate
@@ -69,11 +72,13 @@ public class WindowSystem extends GraphicsEventSystem{
 
 
     public void drawLine(float startX, float startY, float endX, float endY){
-        System.out.println("Draw line with startx: " + startX + " starty: " + startY +
-                " endx: " + endX + " endy " + endY);
+        //System.out.println("Draw line with startx: " + startX + " starty: " + startY +
+          //      " endx: " + endX + " endy " + endY);
         //calculate in coordinates
+        this.setColor(Color.BLACK);
         setccords(startX, startY, endX, endY);
         //do the drawing
+        this.drawLine(startLineX,startLineY,endLineX,endLineY);
 
     }
 
@@ -87,7 +92,8 @@ public class WindowSystem extends GraphicsEventSystem{
      * Add new simple window to window system
      */
     public void AddNewWindow(int width,int height,float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY){
-        System.out.print("aasdjhbsadb");
+
+
         simpleWindows.add(
                 new SimpleWindow(width,height,LeftTopX ,LeftTopY, RightBottomX,  RightBottomY)
 
