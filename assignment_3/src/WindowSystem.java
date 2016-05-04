@@ -33,28 +33,8 @@ public class WindowSystem extends GraphicsEventSystem{
         rectBuffer = new ArrayList<Rectangle>();
     }
 
-    /*
-     * (non-Javadoc)
-     * override handle paint in parent
-     * Set color and draw line using parent methods
-     */
-    @Override
-    protected void handlePaint(){
-       // System.out.println("Draw line in coordinates: " + startLineX +
-         //      " starty: " + startLineY + " endx: " + endLineX + " endy " + endLineY);
-        //put set color and draw line here because calling them outside handle paint gives error message
 
 
-
-
-        //System.out.println("Drawing rectangle hey hey");
-
-        for (Rectangle temp:rectBuffer) {
-            this.drawRect(100,100,20,20);
-            System.out.print("rectangle");
-            this.fillRect(100,100,20,20);
-        }
-    }
 
 
 
@@ -62,23 +42,23 @@ public class WindowSystem extends GraphicsEventSystem{
      * Translate vector to coordinate
      */
     private void setccords(float startX, float startY, float endX, float endY){
-        startLineX = (int)(windowWidth * startX);
-        startLineY = (int)(windowHeight * startY);
-        endLineX = (int)(windowWidth * endX);
-        endLineY = (int)(windowHeight * endY);
+        this.startLineX = (int) (windowWidth * startX);
+        this.startLineY = (int) (windowHeight * startY);
+        this.endLineX = (int) (windowWidth * endX);
+        this.endLineY = (int) (windowHeight * endY);
 
     }
 
 
 
     public void drawLine(float startX, float startY, float endX, float endY){
-        //System.out.println("Draw line with startx: " + startX + " starty: " + startY +
-          //      " endx: " + endX + " endy " + endY);
+        System.out.println("Draw line with startx: " + startX + " starty: " + startY +
+                " endx: " + endX + " endy " + endY);
         //calculate in coordinates
-        this.setColor(Color.BLACK);
+        super.setColor(Color.BLACK);
         setccords(startX, startY, endX, endY);
         //do the drawing
-        this.drawLine(startLineX,startLineY,endLineX,endLineY);
+        super.drawLine(Math.round(startLineX),Math.round(startLineY),Math.round(endLineX),Math.round(endLineY));
 
     }
 
@@ -99,6 +79,28 @@ public class WindowSystem extends GraphicsEventSystem{
 
         );
 
+    }
+    /*
+     * (non-Javadoc)
+     * override handle paint in parent
+     * Set color and draw line using parent methods
+     */
+    @Override
+    protected void handlePaint(){
+         System.out.println("Draw line in coordinates: " + startLineX +
+              " starty: " + startLineY + " endx: " + endLineX + " endy " + endLineY);
+
+
+
+
+
+        //System.out.println("Drawing rectangle hey hey");
+        drawLine(0.5f,0.5f,0.9f,0.9f);
+        // for (Rectangle temp:rectBuffer) {
+        //   this.drawRect(100,100,20,20);
+        // System.out.print("rectangle");
+        //this.fillRect(100,100,20,20);
+        //}
     }
 
 

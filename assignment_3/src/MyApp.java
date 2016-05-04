@@ -9,8 +9,8 @@ public class MyApp{
         windowSystem = new WindowSystem(800, 600);
 
 
-        windowSystem.AddNewWindow(50,50,50.0f,50.0f,20.0f,20.0f);
-
-        windowSystem.handlePaint();
+        //windowSystem.AddNewWindow(50,50,50.0f,50.0f,20.0f,20.0f);
+        //DON'T UNCOMMENT THIS SHIT THIS IS THE SOURCE OF EXCEPTION
+        //windowSystem.handlePaint();
     }
 }
