@@ -62,8 +62,21 @@ public class WindowSystem extends GraphicsEventSystem{
 
     }
 
-    public void drawRect(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY){
-        this.rectBuffer.add(new Rectangle(100,100));
+    public void drawRect(int LeftTopX ,int LeftTopY,int RightBottomX, int RightBottomY){
+
+        System.out.println("drawing rectangle");
+        super.setColor(Color.BLACK);
+        super.drawRect(LeftTopX , LeftTopY, RightBottomX, RightBottomY);
+
+        System.out.println("filling rectangle");
+        super.setColor(Color.BLACK);
+        super.fillRect(LeftTopX , LeftTopY, RightBottomX, RightBottomY);
+        AddNewWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY);
+
+
+
+
+
 
 
     }
@@ -71,11 +84,11 @@ public class WindowSystem extends GraphicsEventSystem{
     /*
      * Add new simple window to window system
      */
-    public void AddNewWindow(int width,int height,float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY){
+    public void AddNewWindow(int LeftTopX ,int LeftTopY,int RightBottomX, int RightBottomY){
 
 
         simpleWindows.add(
-                new SimpleWindow(width,height,LeftTopX ,LeftTopY, RightBottomX,  RightBottomY)
+                new SimpleWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY)
 
         );
 
@@ -93,13 +106,20 @@ public class WindowSystem extends GraphicsEventSystem{
 
 
 
+         //for (Rectangle temp:rectBuffer) {
+        System.out.println("rectangle1");
+        this.drawRect(5,5,50,50);
+        this.drawRect(300,300,600,600);
+        this.drawRect(200,200,400,400);
+        for (SimpleWindow t:simpleWindows
+             ) {System.out.println(t.getID());
 
-        //System.out.println("Drawing rectangle hey hey");
-        drawLine(0.5f,0.5f,0.9f,0.9f);
-        // for (Rectangle temp:rectBuffer) {
-        //   this.drawRect(100,100,20,20);
-        // System.out.print("rectangle");
-        //this.fillRect(100,100,20,20);
+        }
+        System.out.println("rectangle2");
+
+
+
+
         //}
     }
 
