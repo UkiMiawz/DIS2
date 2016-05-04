@@ -7,29 +7,26 @@ public class SimpleWindow{
     //private int height;
     //private int width;
     //window x and y position
-    private float LeftTopX;
-    private float LeftTopY;
-    private float RightBottomX;
-    private float RightBottomY;
+    private float leftTopX;
+    private float leftTopY;
+    private float rightBottomX;
+    private float rightBottomY;
     private UUID id;
 
-    public SimpleWindow(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY){
+    public SimpleWindow(float leftTopX, float leftTopY, float rightBottomX, float rightBottomY){
         //this.height = height;
         //this.width = width;
-        this.LeftTopX = LeftTopX;
-        this.LeftTopY = LeftTopY;
-        this.RightBottomX = RightBottomX;
-        this.RightBottomY = RightBottomY;
+        this.leftTopX = leftTopX;
+        this.leftTopY = leftTopY;
+        this.rightBottomX = rightBottomX;
+        this.rightBottomY = rightBottomY;
         this.id = UUID.randomUUID();
-
-
-
     }
 
     public int getIndex(){ return indexValue;}
-    public float getLeftTopX(){ return LeftTopX; }
-    public float getLeftTopY(){ return LeftTopY; }
-    public float getRightBottomX(){ return RightBottomX; }
-    public float getRightBottomY(){ return RightBottomY; }
+    public float getLeftTopX(){ return leftTopX; }
+    public float getLeftTopY(){ return leftTopY; }
+    public float getRightBottomX(){ return rightBottomX; }
+    public float getRightBottomY(){ return rightBottomY; }
     public UUID getID(){return id;}
 }

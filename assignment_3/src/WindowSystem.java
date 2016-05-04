@@ -33,11 +33,6 @@ public class WindowSystem extends GraphicsEventSystem{
         rectBuffer = new ArrayList<Rectangle>();
     }
 
-
-
-
-
-
     /*
      * Translate vector to coordinate
      */
@@ -49,8 +44,6 @@ public class WindowSystem extends GraphicsEventSystem{
 
     }
 
-
-
     public void drawLine(float startX, float startY, float endX, float endY){
         System.out.println("Draw line with startx: " + startX + " starty: " + startY +
                 " endx: " + endX + " endy " + endY);
@@ -59,7 +52,6 @@ public class WindowSystem extends GraphicsEventSystem{
         setccords(startX, startY, endX, endY);
         //do the drawing
         super.drawLine(Math.round(startLineX),Math.round(startLineY),Math.round(endLineX),Math.round(endLineY));
-
     }
 
     public void drawRect(int LeftTopX ,int LeftTopY,int RightBottomX, int RightBottomY){
@@ -71,28 +63,16 @@ public class WindowSystem extends GraphicsEventSystem{
         System.out.println("filling rectangle");
         super.setColor(Color.BLACK);
         super.fillRect(LeftTopX , LeftTopY, RightBottomX, RightBottomY);
-        AddNewWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY);
-
-
-
-
-
-
-
+        addNewWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY);
     }
 
     /*
      * Add new simple window to window system
      */
-    public void AddNewWindow(int LeftTopX ,int LeftTopY,int RightBottomX, int RightBottomY){
-
-
-        simpleWindows.add(
-                new SimpleWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY)
-
-        );
-
+    public void addNewWindow(int leftTopX ,int leftTopY,int rightBottomX, int rightBottomY){
+        simpleWindows.add(new SimpleWindow(leftTopX, leftTopY, rightBottomX, rightBottomY));
     }
+
     /*
      * (non-Javadoc)
      * override handle paint in parent
@@ -103,24 +83,16 @@ public class WindowSystem extends GraphicsEventSystem{
          System.out.println("Draw line in coordinates: " + startLineX +
               " starty: " + startLineY + " endx: " + endLineX + " endy " + endLineY);
 
-
-
-
-         //for (Rectangle temp:rectBuffer) {
+        //for (Rectangle temp:rectBuffer) {
         System.out.println("rectangle1");
         this.drawRect(5,5,50,50);
         this.drawRect(300,300,600,600);
         this.drawRect(200,200,400,400);
-        for (SimpleWindow t:simpleWindows
-             ) {System.out.println(t.getID());
-
+        for (SimpleWindow t:simpleWindows) {
+            System.out.println(t.getID());
         }
+
         System.out.println("rectangle2");
-
-
-
-
-        //}
     }
 
 
