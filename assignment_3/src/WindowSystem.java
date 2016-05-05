@@ -13,14 +13,19 @@ public class WindowSystem extends GraphicsEventSystem{
     private List<SimpleWindow> simpleWindows;
     public List<SimpleWindow> getListWindows(){return simpleWindows;}
 
+    //background color
+    private final Color backgroundColor = Color.CYAN;
+
     /*
      * Constructor
      */
     public WindowSystem(int width, int height){
         //save window width and height
         super(width, height);
+        super.setBackground(backgroundColor);
         windowWidth = width;
         windowHeight = height;
+
         //instantiate new list
         simpleWindows = new ArrayList<SimpleWindow>();
     }
@@ -47,7 +52,15 @@ public class WindowSystem extends GraphicsEventSystem{
         simpleWindows.add(new SimpleWindow(intStartX, intStartY, width,  height, title));
         System.out.println("Windows list count now " + simpleWindows.size());
 
-        super.requestRepaint(new Rectangle(intStartX, intStartY, width, height));
+        //redraw on adding new window
+        requestRepaint(intStartX, intStartY, width, height);
+    }
+
+    /*
+    * Redraw a rectangle area of the desktop
+    */
+    public void requestRepaint(int startX, int startY, int width, int height){
+        super.requestRepaint(new Rectangle(startX, startY, width, height));
     }
 
     /*
@@ -58,7 +71,10 @@ public class WindowSystem extends GraphicsEventSystem{
     @Override
     protected void handlePaint(){
 
-        for(SimpleWindow t:simpleWindows) {
+        //copy list to avoid iterating through list that being updated
+        List<SimpleWindow> tempSimpleWindows = new ArrayList<SimpleWindow>(simpleWindows);
+
+        for(SimpleWindow t:tempSimpleWindows) {
 
             int leftTopX = t.getLeftTopX();
             int leftTopY = t.getLeftTopY();
@@ -66,10 +82,17 @@ public class WindowSystem extends GraphicsEventSystem{
             int rightBottomY = t.getRightBottomY();
 
             System.out.println("drawing window rectangle");
-            super.setColor(Color.GRAY);
+            super.setColor(t.getColor());
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
-            super.setColor(Color.BLACK);
-            super.drawRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
+
+            //draw rectangle components
+            for(RectangleComponent rectangleComponent:t.getRectangleComponents()){
+                System.out.println("drawing rectangle components of window " + t.getTitle());
+                super.setColor(rectangleComponent.getColor());
+                super.fillRect(rectangleComponent.getX(), rectangleComponent.getY(), 
+                    rectangleComponent.getX() + rectangleComponent.getWidth(), 
+                    rectangleComponent.getY() + rectangleComponent.getHeight());
+            }
         }
     }
 }

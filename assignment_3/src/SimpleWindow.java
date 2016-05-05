@@ -1,4 +1,9 @@
 import java.util.UUID;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.Color;
+
 public class SimpleWindow{
 
     //index of window in the list, also determine which is on top, biggest index means window is on top
@@ -11,7 +16,12 @@ public class SimpleWindow{
     private int height;
     private int width;
 
+    //window title
     private String title;
+    private Color myColor = Color.WHITE;
+
+    //components list
+    private List<RectangleComponent> rectangleComponents;
 
     public SimpleWindow(int leftTopX, int leftTopY, int width, int height, String title){
         
@@ -22,23 +32,34 @@ public class SimpleWindow{
         this.title = title;
 
         this.id = UUID.randomUUID();
+
+        //instantiate component list
+        rectangleComponents = new ArrayList<RectangleComponent>();
     }
 
     //getter
-    public int getIndex(){ return indexValue;}
-    public UUID getId(){return id;}
+    public int getIndex(){ return indexValue; }
+    public UUID getId(){ return id; }
+    public String getTitle(){ return title; }
+    public Color getColor(){ return myColor; }
+
     public int getLeftTopX(){ return leftTopX; }
     public int getLeftTopY(){ return leftTopY; }
     public int getRightBottomX(){ return leftTopX + width; }
     public int getRightBottomY(){ return leftTopY + height; }
     public int getHeight(){ return height; }
     public int getWidth(){ return width; }
-    public String getTitle(){ return title; }
 
     //setter
     public void setIndex(int value){ indexValue = value; }
+    public void setColor(Color value){ myColor = value; }
+
     public void setLeftTopX(int value){ leftTopX = value; }
     public void setLeftTopY(int value){ leftTopY = value; }
     public void setHeight(int value){ height = value; }
     public void setWidth(int value){ width = value; }
+
+    //setter getter for simple window components
+    public void addNewComponent(RectangleComponent newComponent){ rectangleComponents.add(newComponent); }
+    public List<RectangleComponent> getRectangleComponents(){ return rectangleComponents; }
 }
