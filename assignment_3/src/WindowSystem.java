@@ -32,6 +32,7 @@ public class WindowSystem extends GraphicsEventSystem{
         //rectBuffer = new ArrayList<Rectangle>();
     }
 
+<<<<<<< HEAD
 
 
 
@@ -42,6 +43,8 @@ public class WindowSystem extends GraphicsEventSystem{
 
 
 
+=======
+>>>>>>> 9aacecf6628979f153213205c3674a9f6390d44f
     /*
      * Translate vector to coordinate
      */
@@ -51,8 +54,6 @@ public class WindowSystem extends GraphicsEventSystem{
     //    this.endLineX = (int) (windowWidth * endX);
     //    this.endLineY = (int) (windowHeight * endY);
     //}
-
-
 
     public void drawLine(float startX, float startY, float endX, float endY){
         startX = setX(startX);
@@ -66,8 +67,12 @@ public class WindowSystem extends GraphicsEventSystem{
         //setccords(startX, startY, endX, endY);
 
         //do the drawing
+<<<<<<< HEAD
         super.drawLine(startX,startY,endX,endY);
 
+=======
+        super.drawLine(Math.round(startLineX),Math.round(startLineY),Math.round(endLineX),Math.round(endLineY));
+>>>>>>> 9aacecf6628979f153213205c3674a9f6390d44f
     }
 
     public void drawRect(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY, Color col){
@@ -85,19 +90,13 @@ public class WindowSystem extends GraphicsEventSystem{
                 +LeftTopX+" "+ LeftTopY+" "+ RightBottomX + " "+ RightBottomY);
         super.setColor(col);
         super.fillRect(LeftTopX , LeftTopY, RightBottomX, RightBottomY);
-        AddNewWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY);
-
-
-
-
-
-
-
+        addNewWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY);
     }
 
     /*
      * Add new simple window to window system
      */
+<<<<<<< HEAD
     public void AddNewWindow(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY){
 
         LeftTopX = setX(LeftTopX);
@@ -109,7 +108,12 @@ public class WindowSystem extends GraphicsEventSystem{
 
         );
 
+=======
+    public void addNewWindow(int leftTopX ,int leftTopY,int rightBottomX, int rightBottomY){
+        simpleWindows.add(new SimpleWindow(leftTopX, leftTopY, rightBottomX, rightBottomY));
+>>>>>>> 9aacecf6628979f153213205c3674a9f6390d44f
     }
+
     /*
      * (non-Javadoc)
      * override handle paint in parent
@@ -121,6 +125,7 @@ public class WindowSystem extends GraphicsEventSystem{
     @Override
     protected void handlePaint(){
 
+<<<<<<< HEAD
 
 
 
@@ -140,6 +145,18 @@ public class WindowSystem extends GraphicsEventSystem{
 
 
 
+=======
+        //for (Rectangle temp:rectBuffer) {
+        System.out.println("rectangle1");
+        this.drawRect(5,5,50,50);
+        this.drawRect(300,300,600,600);
+        this.drawRect(200,200,400,400);
+        for (SimpleWindow t:simpleWindows) {
+            System.out.println(t.getID());
+        }
+
+        System.out.println("rectangle2");
+>>>>>>> 9aacecf6628979f153213205c3674a9f6390d44f
     }
 
 
