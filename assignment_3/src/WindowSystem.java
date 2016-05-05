@@ -11,13 +11,7 @@ public class WindowSystem extends GraphicsEventSystem{
     private int windowHeight;
     //list of Windows in current window system
     private List<SimpleWindow> simpleWindows;
-
-    //line x and y start position in coordinates
-    //private int startLineX;
-    //private int startLineY;
-    //line x and y end position in coordinates
-    //private int endLineX;
-    //private int endLineY;
+    public List<SimpleWindow> getListWindows(){return simpleWindows;}
 
     /*
      * Constructor
@@ -29,89 +23,31 @@ public class WindowSystem extends GraphicsEventSystem{
         windowHeight = height;
         //instantiate new list
         simpleWindows = new ArrayList<SimpleWindow>();
-        //rectBuffer = new ArrayList<Rectangle>();
     }
 
-<<<<<<< HEAD
+    //coordinate converter
+    public int setX(float x){ return (int) Math.round(x * windowWidth); }
+    public int setY(float y){ return (int) Math.round(y * windowHeight); }
 
-
-
-    public int setX(float X){return (int) Math.round(X*windowWidth);}
-    public int setY(float Y) {return (int) Math.round(Y*windowHeight);}
-
-
-
-
-
-=======
->>>>>>> 9aacecf6628979f153213205c3674a9f6390d44f
     /*
-     * Translate vector to coordinate
+     * Add new window to simple windows
      */
-    //private void setccords(float startX, float startY, float endX, float endY){
-    //    this.startLineX = (int) (windowWidth * startX);
-    //    this.startLineY = (int) (windowHeight * startY);
-    //    this.endLineX = (int) (windowWidth * endX);
-    //    this.endLineY = (int) (windowHeight * endY);
-    //}
+    public void addNewWindow(float startX, float startY, int width, int height, String title){
 
-    public void drawLine(float startX, float startY, float endX, float endY){
-        startX = setX(startX);
-        startY = setY(startY);
-        endX = setX(endX);
-        endY = setY(endY);
-        System.out.println("Draw line with startx: " + startX + " starty: " + startY +
-                " endx: " + endX + " endy " + endY);
+        System.out.println("Add new window with properties vector: " + startX + " starty: " + startY + 
+                " width: " + width + " height " + height);
+
         //calculate in coordinates
-        super.setColor(Color.BLACK);
-        //setccords(startX, startY, endX, endY);
+        int intStartX = setX(startX);
+        int intStartY = setY(startY);
 
-        //do the drawing
-<<<<<<< HEAD
-        super.drawLine(startX,startY,endX,endY);
+        System.out.println("Add new window with coordinates startx: " + intStartX + " starty: " + intStartY + 
+                " width: " + width + " height " + height);
 
-=======
-        super.drawLine(Math.round(startLineX),Math.round(startLineY),Math.round(endLineX),Math.round(endLineY));
->>>>>>> 9aacecf6628979f153213205c3674a9f6390d44f
-    }
+        simpleWindows.add(new SimpleWindow(intStartX, intStartY, width,  height, title));
+        System.out.println("Windows list count now " + simpleWindows.size());
 
-    public void drawRect(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY, Color col){
-
-        LeftTopX = setX(LeftTopX);
-        LeftTopY = setY(LeftTopY);
-        RightBottomX = setX(RightBottomX);
-        RightBottomY = setY(RightBottomY);
-        System.out.println("Drawing rectangle  with parameters: "
-                            +LeftTopX+" "+ LeftTopY+" "+ RightBottomX + " "+ RightBottomY);
-
-        super.drawRect(LeftTopX , LeftTopY, RightBottomX, RightBottomY);
-
-        System.out.println("Filling rectangle  with parameters: "
-                +LeftTopX+" "+ LeftTopY+" "+ RightBottomX + " "+ RightBottomY);
-        super.setColor(col);
-        super.fillRect(LeftTopX , LeftTopY, RightBottomX, RightBottomY);
-        addNewWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY);
-    }
-
-    /*
-     * Add new simple window to window system
-     */
-<<<<<<< HEAD
-    public void AddNewWindow(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY){
-
-        LeftTopX = setX(LeftTopX);
-        LeftTopY = setY(LeftTopY);
-        RightBottomX = setX(RightBottomX);
-        RightBottomY = setY(RightBottomY);
-        simpleWindows.add(
-                new SimpleWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY)
-
-        );
-
-=======
-    public void addNewWindow(int leftTopX ,int leftTopY,int rightBottomX, int rightBottomY){
-        simpleWindows.add(new SimpleWindow(leftTopX, leftTopY, rightBottomX, rightBottomY));
->>>>>>> 9aacecf6628979f153213205c3674a9f6390d44f
+        super.requestRepaint(new Rectangle(intStartX, intStartY, width, height));
     }
 
     /*
@@ -119,45 +55,21 @@ public class WindowSystem extends GraphicsEventSystem{
      * override handle paint in parent
      * Set color and draw line using parent methods
      */
-
-
-    public List<SimpleWindow> getListWindows(){return simpleWindows;}
     @Override
     protected void handlePaint(){
 
-<<<<<<< HEAD
+        for(SimpleWindow t:simpleWindows) {
 
+            int leftTopX = t.getLeftTopX();
+            int leftTopY = t.getLeftTopY();
+            int rightBottomX = t.getRightBottomX();
+            int rightBottomY = t.getRightBottomY();
 
-
-
-
-
-        this.drawRect(0.5f,0.5f,1.0f,1.0f,Color.GRAY);
-        this.drawRect(0.1f,0.1f,0.2f,0.2f,Color.GRAY);
-        this.drawRect(0.3f,0.3f,0.4f,0.4f,Color.GRAY);
-        for (SimpleWindow t:simpleWindows
-             ) {System.out.println("Id is: "+ t.getID());
-
+            System.out.println("drawing window rectangle");
+            super.setColor(Color.GRAY);
+            super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
+            super.setColor(Color.BLACK);
+            super.drawRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
         }
-
-
-
-
-
-
-=======
-        //for (Rectangle temp:rectBuffer) {
-        System.out.println("rectangle1");
-        this.drawRect(5,5,50,50);
-        this.drawRect(300,300,600,600);
-        this.drawRect(200,200,400,400);
-        for (SimpleWindow t:simpleWindows) {
-            System.out.println(t.getID());
-        }
-
-        System.out.println("rectangle2");
->>>>>>> 9aacecf6628979f153213205c3674a9f6390d44f
     }
-
-
 }
