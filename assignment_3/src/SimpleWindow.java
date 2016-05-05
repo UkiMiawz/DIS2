@@ -13,6 +13,8 @@ public class SimpleWindow{
     private float RightBottomY;
     private UUID id;
 
+
+
     public SimpleWindow(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY){
         //this.height = height;
         //this.width = width;

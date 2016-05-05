@@ -11,14 +11,13 @@ public class WindowSystem extends GraphicsEventSystem{
     private int windowHeight;
     //list of Windows in current window system
     private List<SimpleWindow> simpleWindows;
-    private List<Rectangle> rectBuffer;
 
     //line x and y start position in coordinates
-    private int startLineX;
-    private int startLineY;
+    //private int startLineX;
+    //private int startLineY;
     //line x and y end position in coordinates
-    private int endLineX;
-    private int endLineY;
+    //private int endLineX;
+    //private int endLineY;
 
     /*
      * Constructor
@@ -30,9 +29,14 @@ public class WindowSystem extends GraphicsEventSystem{
         windowHeight = height;
         //instantiate new list
         simpleWindows = new ArrayList<SimpleWindow>();
-        rectBuffer = new ArrayList<Rectangle>();
+        //rectBuffer = new ArrayList<Rectangle>();
     }
 
+
+
+
+    public int setX(float X){return (int) Math.round(X*windowWidth);}
+    public int setY(float Y) {return (int) Math.round(Y*windowHeight);}
 
 
 
@@ -41,35 +45,45 @@ public class WindowSystem extends GraphicsEventSystem{
     /*
      * Translate vector to coordinate
      */
-    private void setccords(float startX, float startY, float endX, float endY){
-        this.startLineX = (int) (windowWidth * startX);
-        this.startLineY = (int) (windowHeight * startY);
-        this.endLineX = (int) (windowWidth * endX);
-        this.endLineY = (int) (windowHeight * endY);
-
-    }
+    //private void setccords(float startX, float startY, float endX, float endY){
+    //    this.startLineX = (int) (windowWidth * startX);
+    //    this.startLineY = (int) (windowHeight * startY);
+    //    this.endLineX = (int) (windowWidth * endX);
+    //    this.endLineY = (int) (windowHeight * endY);
+    //}
 
 
 
     public void drawLine(float startX, float startY, float endX, float endY){
+        startX = setX(startX);
+        startY = setY(startY);
+        endX = setX(endX);
+        endY = setY(endY);
         System.out.println("Draw line with startx: " + startX + " starty: " + startY +
                 " endx: " + endX + " endy " + endY);
         //calculate in coordinates
         super.setColor(Color.BLACK);
-        setccords(startX, startY, endX, endY);
+        //setccords(startX, startY, endX, endY);
+
         //do the drawing
-        super.drawLine(Math.round(startLineX),Math.round(startLineY),Math.round(endLineX),Math.round(endLineY));
+        super.drawLine(startX,startY,endX,endY);
 
     }
 
-    public void drawRect(int LeftTopX ,int LeftTopY,int RightBottomX, int RightBottomY){
+    public void drawRect(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY, Color col){
 
-        System.out.println("drawing rectangle");
-        super.setColor(Color.BLACK);
+        LeftTopX = setX(LeftTopX);
+        LeftTopY = setY(LeftTopY);
+        RightBottomX = setX(RightBottomX);
+        RightBottomY = setY(RightBottomY);
+        System.out.println("Drawing rectangle  with parameters: "
+                            +LeftTopX+" "+ LeftTopY+" "+ RightBottomX + " "+ RightBottomY);
+
         super.drawRect(LeftTopX , LeftTopY, RightBottomX, RightBottomY);
 
-        System.out.println("filling rectangle");
-        super.setColor(Color.BLACK);
+        System.out.println("Filling rectangle  with parameters: "
+                +LeftTopX+" "+ LeftTopY+" "+ RightBottomX + " "+ RightBottomY);
+        super.setColor(col);
         super.fillRect(LeftTopX , LeftTopY, RightBottomX, RightBottomY);
         AddNewWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY);
 
@@ -84,9 +98,12 @@ public class WindowSystem extends GraphicsEventSystem{
     /*
      * Add new simple window to window system
      */
-    public void AddNewWindow(int LeftTopX ,int LeftTopY,int RightBottomX, int RightBottomY){
+    public void AddNewWindow(float LeftTopX ,float LeftTopY,float RightBottomX, float RightBottomY){
 
-
+        LeftTopX = setX(LeftTopX);
+        LeftTopY = setY(LeftTopY);
+        RightBottomX = setX(RightBottomX);
+        RightBottomY = setY(RightBottomY);
         simpleWindows.add(
                 new SimpleWindow(LeftTopX ,LeftTopY, RightBottomX,  RightBottomY)
 
@@ -98,29 +115,31 @@ public class WindowSystem extends GraphicsEventSystem{
      * override handle paint in parent
      * Set color and draw line using parent methods
      */
+
+
+    public List<SimpleWindow> getListWindows(){return simpleWindows;}
     @Override
     protected void handlePaint(){
-         System.out.println("Draw line in coordinates: " + startLineX +
-              " starty: " + startLineY + " endx: " + endLineX + " endy " + endLineY);
 
 
 
 
-         //for (Rectangle temp:rectBuffer) {
-        System.out.println("rectangle1");
-        this.drawRect(5,5,50,50);
-        this.drawRect(300,300,600,600);
-        this.drawRect(200,200,400,400);
+
+
+
+        this.drawRect(0.5f,0.5f,1.0f,1.0f,Color.GRAY);
+        this.drawRect(0.1f,0.1f,0.2f,0.2f,Color.GRAY);
+        this.drawRect(0.3f,0.3f,0.4f,0.4f,Color.GRAY);
         for (SimpleWindow t:simpleWindows
-             ) {System.out.println(t.getID());
+             ) {System.out.println("Id is: "+ t.getID());
 
         }
-        System.out.println("rectangle2");
 
 
 
 
-        //}
+
+
     }
 
 
