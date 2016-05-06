@@ -18,7 +18,8 @@ public class SimpleWindow{
 
     //window title
     private String title;
-    private Color myColor = Color.WHITE;
+    private Color fillColorWindow = Color.WHITE;
+    private Color frameColorWindow = Color.BLACK;
 
     //components list
     private List<RectangleComponent> rectangleComponents;
@@ -32,6 +33,7 @@ public class SimpleWindow{
         this.title = title;
 
         this.id = UUID.randomUUID();
+        this.title = "Window ";
 
         //instantiate component list
         rectangleComponents = new ArrayList<RectangleComponent>();
@@ -41,7 +43,8 @@ public class SimpleWindow{
     public int getIndex(){ return indexValue; }
     public UUID getId(){ return id; }
     public String getTitle(){ return title; }
-    public Color getColor(){ return myColor; }
+    public Color getFillColorWindow(){ return fillColorWindow; }
+    public Color getFrameColorWindow() {return frameColorWindow; }
 
     public int getLeftTopX(){ return leftTopX; }
     public int getLeftTopY(){ return leftTopY; }
@@ -52,7 +55,8 @@ public class SimpleWindow{
 
     //setter
     public void setIndex(int value){ indexValue = value; }
-    public void setColor(Color value){ myColor = value; }
+    public void setFillColorWindowColor(Color value){ fillColorWindow = value; }
+    public void setFrameColorWindow(Color value) {frameColorWindow = value;}
 
     public void setLeftTopX(int value){ leftTopX = value; }
     public void setLeftTopY(int value){ leftTopY = value; }

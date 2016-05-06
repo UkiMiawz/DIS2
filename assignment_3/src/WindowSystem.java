@@ -14,7 +14,8 @@ public class WindowSystem extends GraphicsEventSystem{
     public List<SimpleWindow> getListWindows(){return simpleWindows;}
 
     //background color
-    private final Color backgroundColor = Color.CYAN;
+    private final Color backgroundColor = Color.GRAY; //CYAN
+
 
     /*
      * Constructor
@@ -61,6 +62,8 @@ public class WindowSystem extends GraphicsEventSystem{
     */
     public void requestRepaint(int startX, int startY, int width, int height){
         super.requestRepaint(new Rectangle(startX, startY, width, height));
+
+
     }
 
     /*
@@ -73,7 +76,7 @@ public class WindowSystem extends GraphicsEventSystem{
 
         //copy list to avoid iterating through list that being updated
         List<SimpleWindow> tempSimpleWindows = new ArrayList<SimpleWindow>(simpleWindows);
-
+        //super.drawString("hello", 0,0);
         for(SimpleWindow t:tempSimpleWindows) {
 
             int leftTopX = t.getLeftTopX();
@@ -82,16 +85,23 @@ public class WindowSystem extends GraphicsEventSystem{
             int rightBottomY = t.getRightBottomY();
 
             System.out.println("drawing window rectangle");
-            super.setColor(t.getColor());
+            super.setColor(t.getFrameColorWindow());
+            super.drawRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
+            super.setColor(t.getFillColorWindow());
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
+
 
             //draw rectangle components
             for(RectangleComponent rectangleComponent:t.getRectangleComponents()){
                 System.out.println("drawing rectangle components of window " + t.getTitle());
+                //super.setColor(Color.black);
+                //rectangleComponent.setString(t.getTitle());
+                //super.drawString(rectangleComponent.getString(), t.getLeftTopX(),t.getLeftTopY());
                 super.setColor(rectangleComponent.getColor());
                 super.fillRect(rectangleComponent.getX(), rectangleComponent.getY(), 
                     rectangleComponent.getX() + rectangleComponent.getWidth(), 
                     rectangleComponent.getY() + rectangleComponent.getHeight());
+
             }
         }
     }

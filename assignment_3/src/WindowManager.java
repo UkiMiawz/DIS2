@@ -11,11 +11,20 @@ public class WindowManager  {
     private int titleBarLeftY;
     private int titleBarRightX;
     private int titleBarRightY;
+    private int closeButtonLeftX;
+    private int closeButtonLeftY;
+    private int closeButtonRightX;
+    private int getCloseButtonRightY;
+    private int titleX;
+    private int titleY;
 
-    private final Color headerSquareColor = Color.BLUE;
-    private final Color windowColor = Color.LIGHT_GRAY;
+    private final Color headerSquareColor = Color.orange; //Blue
+    private final Color windowColor = Color.WHITE;//Light_gray
+    private final Color closeButtonColor = Color.RED;
 
     private final int titleBarHeight = 20;
+    private final int closeButtonHeight = 20;
+    private final int closeButtonWidth  = 20;
 
     public WindowManager(WindowSystem windowSystem) {
         this.windowSystem = windowSystem;
@@ -23,7 +32,7 @@ public class WindowManager  {
         
         for (SimpleWindow t:listWindows) {
 
-            t.setColor(windowColor);
+            t.setFillColorWindowColor(windowColor);
 
             //add header bar
             System.out.println("Adding header bar to window " + t.getTitle());
@@ -31,15 +40,31 @@ public class WindowManager  {
                 + t.getWidth() + " " + t.getHeight());
 
             int titleBarLeftX = t.getLeftTopX();
-            int titleBarLeftY = t.getLeftTopY() - titleBarHeight;
+            int titleBarLeftY = t.getLeftTopY();//- titleBarHeight;
+
             int titleBarWidth = t.getWidth();
 
+
+            int closeButtonLeftX = t.getRightBottomX() - closeButtonWidth;
+            int closeButtonLeftY = t.getLeftTopY();
+
+            int titleX = t.getLeftTopX();
+            int titleY = t.getLeftTopY();
+
             System.out.println("Title bar position now " + titleBarLeftX + " " + titleBarLeftY);
-            RectangleComponent titleBar = new RectangleComponent(titleBarLeftX, titleBarLeftY, titleBarWidth, 
+            RectangleComponent titleBar = new RectangleComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
                 titleBarHeight, headerSquareColor);
             t.addNewComponent(titleBar);
+            RectangleComponent closeButton = new RectangleComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,
+                    closeButtonHeight, closeButtonColor);
+            t.addNewComponent(closeButton);
+
+
+
+
 
             windowSystem.requestRepaint(titleBarLeftX, titleBarLeftY, t.getWidth(), t.getHeight() + titleBarHeight);
+            windowSystem.requestRepaint(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,closeButtonHeight);
         }
 
     }
