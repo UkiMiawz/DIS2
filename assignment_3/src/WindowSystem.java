@@ -14,7 +14,7 @@ public class WindowSystem extends GraphicsEventSystem{
     public List<SimpleWindow> getListWindows(){return simpleWindows;}
 
     //background color
-    private final Color backgroundColor = Color.GRAY; //CYAN
+    private final Color backgroundColor = Color.GRAY;
 
 
     /*
@@ -54,7 +54,7 @@ public class WindowSystem extends GraphicsEventSystem{
         System.out.println("Windows list count now " + simpleWindows.size());
 
         //redraw on adding new window
-        requestRepaint(intStartX, intStartY, width, height);
+        requestRepaint(intStartX-1, intStartY-1, width+2, height+2);
     }
 
     /*
@@ -86,7 +86,7 @@ public class WindowSystem extends GraphicsEventSystem{
 
             System.out.println("drawing window rectangle");
             super.setColor(t.getFrameColorWindow());
-            super.drawRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
+            super.drawRect(leftTopX-1 , leftTopY-1, rightBottomX, rightBottomY);
             super.setColor(t.getFillColorWindow());
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
 
@@ -94,14 +94,16 @@ public class WindowSystem extends GraphicsEventSystem{
             //draw rectangle components
             for(RectangleComponent rectangleComponent:t.getRectangleComponents()){
                 System.out.println("drawing rectangle components of window " + t.getTitle());
-                //super.setColor(Color.black);
-                //rectangleComponent.setString(t.getTitle());
-                //super.drawString(rectangleComponent.getString(), t.getLeftTopX(),t.getLeftTopY());
+
                 super.setColor(rectangleComponent.getColor());
                 super.fillRect(rectangleComponent.getX(), rectangleComponent.getY(), 
                     rectangleComponent.getX() + rectangleComponent.getWidth(), 
                     rectangleComponent.getY() + rectangleComponent.getHeight());
 
+                rectangleComponent.setString(t.getTitle());
+                System.out.println("drawing title of window " + t.getTitle());
+                super.setColor(Color.black);
+                super.drawString(rectangleComponent.getString(), t.getLeftTopX() + 10, t.getLeftTopY() + 15);
             }
         }
     }

@@ -18,8 +18,8 @@ public class WindowManager  {
     private int titleX;
     private int titleY;
 
-    private final Color headerSquareColor = Color.orange; //Blue
-    private final Color windowColor = Color.WHITE;//Light_gray
+    private final Color headerSquareColor = Color.orange;
+    private final Color windowColor = Color.WHITE;
     private final Color closeButtonColor = Color.RED;
 
     private final int titleBarHeight = 20;
@@ -59,12 +59,7 @@ public class WindowManager  {
                     closeButtonHeight, closeButtonColor);
             t.addNewComponent(closeButton);
 
-
-
-
-
-            windowSystem.requestRepaint(titleBarLeftX, titleBarLeftY, t.getWidth(), t.getHeight() + titleBarHeight);
-            windowSystem.requestRepaint(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,closeButtonHeight);
+            windowSystem.requestRepaint(titleBarLeftX-1, titleBarLeftY-1, t.getWidth()+2, t.getHeight() + titleBarHeight+2);
         }
 
     }

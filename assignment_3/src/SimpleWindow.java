@@ -18,7 +18,7 @@ public class SimpleWindow{
 
     //window title
     private String title;
-    private Color fillColorWindow = Color.WHITE;
+    private Color fillColorWindow = Color.GREEN;
     private Color frameColorWindow = Color.BLACK;
 
     //components list
@@ -33,7 +33,6 @@ public class SimpleWindow{
         this.title = title;
 
         this.id = UUID.randomUUID();
-        this.title = "Window ";
 
         //instantiate component list
         rectangleComponents = new ArrayList<RectangleComponent>();
