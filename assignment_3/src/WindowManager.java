@@ -89,5 +89,23 @@ public class WindowManager  {
 
     public void handleMousePressed(int x, int y){
         System.out.println("Window manager - Mouse pressed with x " + x + " and y " + y);
+        listWindows = windowSystem.getListWindows();
+        boolean windowFound = false;
+
+         for(int i=listWindows.size()-1; i >= 0 ;i--){
+
+           SimpleWindow window = listWindows.get(i);
+           if( windowFound == false && (window.getLeftTopX() < x && x < window.getLeftTopX() + window.getWidth())
+                   && (window.getLeftTopY() < y && y < window.getLeftTopY()+window.getHeight()) )
+           {   windowFound = true;
+               System.out.println(window.getId());
+               windowSystem.getListWindows().remove(i);
+               windowSystem.getListWindows().add(window);
+
+           }
+
+
+       }
+        windowSystem.requestRepaint();
     }
 }
