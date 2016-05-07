@@ -12,10 +12,10 @@ public class WindowSystem extends GraphicsEventSystem{
     //list of Windows in current window system
     private List<SimpleWindow> simpleWindows;
     public List<SimpleWindow> getListWindows(){return simpleWindows;}
+    private static WindowManager windowManager;
 
     //background color
     private final Color backgroundColor = Color.GRAY;
-
 
     /*
      * Constructor
@@ -27,8 +27,9 @@ public class WindowSystem extends GraphicsEventSystem{
         windowWidth = width;
         windowHeight = height;
 
-        //instantiate new list
+        //instantiate list and objects
         simpleWindows = new ArrayList<SimpleWindow>();
+        windowManager = new WindowManager(this);
     }
 
     //coordinate converter
@@ -50,11 +51,17 @@ public class WindowSystem extends GraphicsEventSystem{
         System.out.println("Add new window with coordinates startx: " + intStartX + " starty: " + intStartY + 
                 " width: " + width + " height " + height);
 
-        simpleWindows.add(new SimpleWindow(intStartX, intStartY, width,  height, title));
+        SimpleWindow newWindow = new SimpleWindow(intStartX, intStartY, width,  height, title);
+        simpleWindows.add(newWindow);
         System.out.println("Windows list count now " + simpleWindows.size());
 
         //redraw on adding new window
         requestRepaint(intStartX-1, intStartY-1, width+2, height+2);
+
+        //call window manager
+        if(windowManager != null){
+            windowManager.redrawWindow(newWindow);
+        }
     }
 
     /*
@@ -105,6 +112,14 @@ public class WindowSystem extends GraphicsEventSystem{
                 super.setColor(Color.black);
                 super.drawString(rectangleComponent.getString(), t.getLeftTopX() + 10, t.getLeftTopY() + 15);
             }
+        }
+    }
+
+    @Override
+    public void handleMouseClicked(int x, int y){
+        System.out.println("Mouse clicked with x " + x + " and y " + y);
+        if(windowManager != null){
+            windowManager.handleMouseClicked(x, y);
         }
     }
 }

@@ -26,41 +26,56 @@ public class WindowManager  {
     private final int closeButtonHeight = 20;
     private final int closeButtonWidth  = 20;
 
+    /*
+    * Constructor
+    */
     public WindowManager(WindowSystem windowSystem) {
         this.windowSystem = windowSystem;
-        listWindows = windowSystem.getListWindows();
-        
-        for (SimpleWindow t:listWindows) {
+    }
 
-            t.setFillColorWindowColor(windowColor);
+    /*
+    * Redraw all windows in the list
+    */
+    public void redrawAllWindows(){
+            listWindows = windowSystem.getListWindows();
 
-            //add header bar
-            System.out.println("Adding header bar to window " + t.getTitle());
-            System.out.println("Window properties " + t.getLeftTopX() + " " + t.getLeftTopY() + " " 
-                + t.getWidth() + " " + t.getHeight());
+            for (SimpleWindow t:listWindows) {
+                redrawWindow(t);
+            }
+    }
 
-            int titleBarLeftX = t.getLeftTopX();
-            int titleBarLeftY = t.getLeftTopY();//- titleBarHeight;
+    public void redrawWindow(SimpleWindow t){
+        t.setFillColorWindowColor(windowColor);
 
-            int titleBarWidth = t.getWidth();
+        //add header bar
+        System.out.println("Adding header bar to window " + t.getTitle());
+        System.out.println("Window properties " + t.getLeftTopX() + " " + t.getLeftTopY() + " " 
+            + t.getWidth() + " " + t.getHeight());
+
+        int titleBarLeftX = t.getLeftTopX();
+        int titleBarLeftY = t.getLeftTopY();//- titleBarHeight;
+
+        int titleBarWidth = t.getWidth();
 
 
-            int closeButtonLeftX = t.getRightBottomX() - closeButtonWidth;
-            int closeButtonLeftY = t.getLeftTopY();
+        int closeButtonLeftX = t.getRightBottomX() - closeButtonWidth;
+        int closeButtonLeftY = t.getLeftTopY();
 
-            int titleX = t.getLeftTopX();
-            int titleY = t.getLeftTopY();
+        int titleX = t.getLeftTopX();
+        int titleY = t.getLeftTopY();
 
-            System.out.println("Title bar position now " + titleBarLeftX + " " + titleBarLeftY);
-            RectangleComponent titleBar = new RectangleComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
-                titleBarHeight, headerSquareColor);
-            t.addNewComponent(titleBar);
-            RectangleComponent closeButton = new RectangleComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,
-                    closeButtonHeight, closeButtonColor);
-            t.addNewComponent(closeButton);
+        System.out.println("Title bar position now " + titleBarLeftX + " " + titleBarLeftY);
+        RectangleComponent titleBar = new RectangleComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
+            titleBarHeight, headerSquareColor);
+        t.addNewComponent(titleBar);
+        RectangleComponent closeButton = new RectangleComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,
+                closeButtonHeight, closeButtonColor);
+        t.addNewComponent(closeButton);
 
-            windowSystem.requestRepaint(titleBarLeftX-1, titleBarLeftY-1, t.getWidth()+2, t.getHeight() + titleBarHeight+2);
-        }
+        windowSystem.requestRepaint(titleBarLeftX-1, titleBarLeftY-1, t.getWidth()+2, t.getHeight() + titleBarHeight+2);            
+    }
 
+    public void handleMouseClicked(int x, int y){
+        System.out.println("Window manager - Mouse clicked with x " + x + " and y " + y);
     }
 }
