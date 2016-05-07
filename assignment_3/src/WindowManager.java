@@ -78,12 +78,18 @@ public class WindowManager  {
 
     public void handleMouseClicked(int x, int y){
         System.out.println("Window manager - Mouse clicked with x " + x + " and y " + y);
+        setActiveWindow(x, y);
+        if(currentActiveWindow != null){
+            //reorder window
+            windowSystem.getListWindows().remove(currentActiveWindow);
+            windowSystem.getListWindows().add(currentActiveWindow);
+        }
+        windowSystem.requestRepaint();
         currentActiveWindow = null;
     }
 
     public void handleMouseDragged(int x, int y){
         System.out.println("Window manager - Mouse dragged with x " + x + " and y " + y);
-        currentActiveWindow = null;
     }
 
     public void handleMouseReleased(int x, int y){
@@ -93,16 +99,6 @@ public class WindowManager  {
 
     public void handleMousePressed(int x, int y){
         System.out.println("Window manager - Mouse pressed with x " + x + " and y " + y);
-
-        setActiveWindow(x, y);
-        if(currentActiveWindow != null){
-            //reorder window
-            windowSystem.getListWindows().remove(currentActiveWindow);
-            windowSystem.getListWindows().add(currentActiveWindow);
-        }
-        windowSystem.requestRepaint();
-        //clear active window
-        currentActiveWindow = null;
     }
 
     private void setActiveWindow(int x, int y){
