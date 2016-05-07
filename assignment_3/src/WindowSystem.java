@@ -69,8 +69,6 @@ public class WindowSystem extends GraphicsEventSystem{
     */
     public void requestRepaint(int startX, int startY, int width, int height){
         super.requestRepaint(new Rectangle(startX, startY, width, height));
-
-
     }
 
     /*
@@ -117,9 +115,29 @@ public class WindowSystem extends GraphicsEventSystem{
 
     @Override
     public void handleMouseClicked(int x, int y){
-        System.out.println("Mouse clicked with x " + x + " and y " + y);
         if(windowManager != null){
             windowManager.handleMouseClicked(x, y);
+        }
+    }
+
+    @Override
+    public void handleMouseDragged(int x, int y){
+        if(windowManager != null){
+            windowManager.handleMouseDragged(x, y);
+        }
+    }
+
+    @Override
+    public void handleMouseReleased(int x, int y){
+        if(windowManager != null){
+            windowManager.handleMouseReleased(x, y);
+        }
+    }
+
+    @Override
+    public void handleMousePressed(int x, int y){
+        if(windowManager != null){
+            windowManager.handleMousePressed(x, y);
         }
     }
 }

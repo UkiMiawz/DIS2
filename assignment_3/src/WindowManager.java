@@ -78,4 +78,16 @@ public class WindowManager  {
     public void handleMouseClicked(int x, int y){
         System.out.println("Window manager - Mouse clicked with x " + x + " and y " + y);
     }
+
+    public void handleMouseDragged(int x, int y){
+        System.out.println("Window manager - Mouse dragged with x " + x + " and y " + y);
+    }
+
+    public void handleMouseReleased(int x, int y){
+        System.out.println("Window manager - Mouse released with x " + x + " and y " + y);
+    }
+
+    public void handleMousePressed(int x, int y){
+        System.out.println("Window manager - Mouse pressed with x " + x + " and y " + y);
+    }
 }
