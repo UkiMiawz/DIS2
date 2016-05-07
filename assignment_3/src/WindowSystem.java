@@ -74,15 +74,6 @@ public class WindowSystem extends GraphicsEventSystem{
         //copy list to avoid iterating through list that being updated
         List<SimpleWindow> tempSimpleWindows = new ArrayList<SimpleWindow>(simpleWindows);
 
-        //draw shadow first
-        if(windowManager != null){
-            for(SimpleWindow t:tempSimpleWindows){
-                System.out.println("Drawing window shadow for " + t.getTitle());
-                super.setColor(windowManager.getShadowColor());
-                super.fillRect(t.getLeftTopX()+10 , t.getLeftTopY()+10, t.getRightBottomX()+10, t.getRightBottomY()+10);
-            }
-        }
-
         //super.drawString("hello", 0,0);
         for(SimpleWindow t:tempSimpleWindows) {
 
@@ -90,6 +81,13 @@ public class WindowSystem extends GraphicsEventSystem{
             int leftTopY = t.getLeftTopY();
             int rightBottomX = t.getRightBottomX();
             int rightBottomY = t.getRightBottomY();
+
+            //draw shadow first
+            if(windowManager != null){
+                System.out.println("Drawing window shadow for " + t.getTitle());
+                super.setColor(windowManager.getShadowColor());
+                super.fillRect(t.getLeftTopX()+15 , t.getLeftTopY()+15, t.getRightBottomX()+15, t.getRightBottomY()+15);
+            }
 
             System.out.println("drawing window rectangle");
             super.setColor(t.getFrameColorWindow());

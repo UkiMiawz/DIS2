@@ -21,7 +21,7 @@ public class WindowManager  {
     private final Color headerSquareColor = Color.orange;
     private final Color windowColor = Color.WHITE;
     private final Color closeButtonColor = Color.RED;
-    private Color shadowColor = Color.GRAY;
+    private Color shadowColor = new Color(0f,0f,0f,.5f);
 
     private final int titleBarHeight = 20;
     private final int closeButtonHeight = 20;
@@ -58,20 +58,23 @@ public class WindowManager  {
             + t.getWidth() + " " + t.getHeight());
 
         int titleBarLeftX = t.getLeftTopX();
-        int titleBarLeftY = t.getLeftTopY();//- titleBarHeight;
+        int titleBarLeftY = t.getLeftTopY();
 
         int titleBarWidth = t.getWidth();
-
-        int closeButtonLeftX = t.getRightBottomX() - closeButtonWidth;
-        int closeButtonLeftY = t.getLeftTopY();
 
         int titleX = t.getLeftTopX();
         int titleY = t.getLeftTopY();
 
+        //add title bar
         System.out.println("Title bar position now " + titleBarLeftX + " " + titleBarLeftY);
         RectangleComponent titleBar = new RectangleComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
             titleBarHeight, headerSquareColor);
         t.addNewComponent(titleBar);
+
+        int closeButtonLeftX = t.getRightBottomX() - closeButtonWidth;
+        int closeButtonLeftY = t.getLeftTopY();
+
+        //add close button
         RectangleComponent closeButton = new RectangleComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,
                 closeButtonHeight, closeButtonColor);
         t.addNewComponent(closeButton);
