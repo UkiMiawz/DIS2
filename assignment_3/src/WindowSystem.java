@@ -15,7 +15,7 @@ public class WindowSystem extends GraphicsEventSystem{
     private static WindowManager windowManager;
 
     //background color
-    private final Color backgroundColor = Color.GRAY;
+    private final Color backgroundColor = Color.LIGHT_GRAY;
 
     /*
      * Constructor
@@ -73,6 +73,16 @@ public class WindowSystem extends GraphicsEventSystem{
 
         //copy list to avoid iterating through list that being updated
         List<SimpleWindow> tempSimpleWindows = new ArrayList<SimpleWindow>(simpleWindows);
+
+        //draw shadow first
+        if(windowManager != null){
+            for(SimpleWindow t:tempSimpleWindows){
+                System.out.println("Drawing window shadow for " + t.getTitle());
+                super.setColor(windowManager.getShadowColor());
+                super.fillRect(t.getLeftTopX()+10 , t.getLeftTopY()+10, t.getRightBottomX()+10, t.getRightBottomY()+10);
+            }
+        }
+
         //super.drawString("hello", 0,0);
         for(SimpleWindow t:tempSimpleWindows) {
 

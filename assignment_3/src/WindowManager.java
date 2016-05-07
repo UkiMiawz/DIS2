@@ -21,12 +21,15 @@ public class WindowManager  {
     private final Color headerSquareColor = Color.orange;
     private final Color windowColor = Color.WHITE;
     private final Color closeButtonColor = Color.RED;
+    private Color shadowColor = Color.GRAY;
 
     private final int titleBarHeight = 20;
     private final int closeButtonHeight = 20;
     private final int closeButtonWidth  = 20;
 
     private SimpleWindow currentActiveWindow;
+
+    public Color getShadowColor(){ return shadowColor; }
 
     /*
     * Constructor
