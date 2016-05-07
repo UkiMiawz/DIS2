@@ -56,7 +56,7 @@ public class WindowSystem extends GraphicsEventSystem{
         System.out.println("Windows list count now " + simpleWindows.size());
 
         //redraw on adding new window
-        requestRepaint(intStartX-1, intStartY-1, width+2, height+2);
+        requestRepaint();
 
         //call window manager
         if(windowManager != null){
@@ -65,14 +65,6 @@ public class WindowSystem extends GraphicsEventSystem{
     }
 
     /*
-    * Redraw a rectangle area of the desktop
-    */
-    public void requestRepaint(int startX, int startY, int width, int height){
-        super.requestRepaint(new Rectangle(startX, startY, width, height));
-    }
-
-    /*
-     * (non-Javadoc)
      * override handle paint in parent
      * Set color and draw line using parent methods
      */
@@ -94,7 +86,6 @@ public class WindowSystem extends GraphicsEventSystem{
             super.drawRect(leftTopX-1 , leftTopY-1, rightBottomX, rightBottomY);
             super.setColor(t.getFillColorWindow());
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
-
 
             //draw rectangle components
             for(RectangleComponent rectangleComponent:t.getRectangleComponents()){

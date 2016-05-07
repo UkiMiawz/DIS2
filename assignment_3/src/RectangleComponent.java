@@ -12,7 +12,6 @@ public class RectangleComponent extends Rectangle{
 
 	public RectangleComponent(int startX, int startY, int width, int height, Color myColor){
 		super(startX, startY, width, height);
-
 		this.myColor = myColor;
 	}
 
