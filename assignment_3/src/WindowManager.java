@@ -101,19 +101,12 @@ public class WindowManager  {
 
     public void handleMouseDragged(int x, int y){
         System.out.println("Window manager - Mouse dragged with x " + x + " and y " + y);
-        //setActiveWindow(x,y);
-        //SimpleWindow window= listWindows.get(listWindows.size()-1);
-
-        //window.setLeftTopX(x);
-        //window.setLeftTopY(y);
-
-        //listWindows.remove(listWindows.size()-1);
-
-        //listWindows.add(window);
-
-        //windowSystem.requestRepaint();
-
-
+        setActiveWindow(x,y);
+        if(currentActiveWindow != null){
+            currentActiveWindow.setLeftTopX(x);
+            currentActiveWindow.setLeftTopY(y);
+            redrawWindow(currentActiveWindow);
+        }
     }
 
     public void handleMouseReleased(int x, int y){

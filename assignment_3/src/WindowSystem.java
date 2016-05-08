@@ -86,7 +86,7 @@ public class WindowSystem extends GraphicsEventSystem{
             if(windowManager != null){
                 System.out.println("Drawing window shadow for " + t.getTitle());
                 super.setColor(windowManager.getShadowColor());
-                super.fillRect(t.getLeftTopX()+15 , t.getLeftTopY()+15, t.getRightBottomX()+15, t.getRightBottomY()+15);
+                super.fillRect(t.getLeftTopX()+15 , t.getLeftTopY()+15, t.getRightBottomX()+10, t.getRightBottomY()+10);
             }
 
             System.out.println("drawing window rectangle");
