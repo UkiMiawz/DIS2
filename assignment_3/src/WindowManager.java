@@ -21,7 +21,6 @@ public class WindowManager  {
     private final Color headerSquareColor = Color.orange;
     private final Color windowColor = Color.WHITE;
     private final Color closeButtonColor = Color.RED;
-    private Color shadowColor = new Color(0f,0f,0f,.5f);
 
     private final int titleBarHeight = 20;
     private final int closeButtonHeight = 20;
@@ -31,8 +30,6 @@ public class WindowManager  {
 
     private int lastMouseX;
     private int lastMouseY;
-
-    public Color getShadowColor(){ return shadowColor; }
 
     /*
     * Constructor
