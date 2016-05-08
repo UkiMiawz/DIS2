@@ -79,11 +79,50 @@ public class WindowManager  {
                 closeButtonHeight, closeButtonColor);
         t.addNewComponent(closeButton);
 
-        windowSystem.requestRepaint();            
+        windowSystem.requestRepaint();
     }
 
     public void handleMouseClicked(int x, int y){
         System.out.println("Window manager - Mouse clicked with x " + x + " and y " + y);
+        //setActiveWindow(x, y);
+        //if(currentActiveWindow != null){
+            //reorder window
+          //  windowSystem.getListWindows().remove(currentActiveWindow);
+           // windowSystem.getListWindows().add(currentActiveWindow);
+        //}
+        //windowSystem.requestRepaint();
+        //currentActiveWindow = null;
+//        setActiveWindow(x,y);
+//        SimpleWindow window = listWindows.get(listWindows.size()-1);
+//        if(isClose(x,y,window)){ listWindows.remove(listWindows.size()-1);
+//            System.out.print("That is Close button on" + x + " " + y);}
+//        windowSystem.requestRepaint();
+    }
+
+    public void handleMouseDragged(int x, int y){
+        System.out.println("Window manager - Mouse dragged with x " + x + " and y " + y);
+        //setActiveWindow(x,y);
+        //SimpleWindow window= listWindows.get(listWindows.size()-1);
+
+        //window.setLeftTopX(x);
+        //window.setLeftTopY(y);
+
+        //listWindows.remove(listWindows.size()-1);
+
+        //listWindows.add(window);
+
+        //windowSystem.requestRepaint();
+
+
+    }
+
+    public void handleMouseReleased(int x, int y){
+        System.out.println("Window manager - Mouse released with x " + x + " and y " + y);
+        currentActiveWindow = null;
+    }
+
+    public void handleMousePressed(int x, int y){
+        System.out.println("Window manager - Mouse pressed with x " + x + " and y " + y);
         setActiveWindow(x, y);
         if(currentActiveWindow != null){
             //reorder window
@@ -94,21 +133,10 @@ public class WindowManager  {
         currentActiveWindow = null;
     }
 
-    public void handleMouseDragged(int x, int y){
-        System.out.println("Window manager - Mouse dragged with x " + x + " and y " + y);
-    }
-
-    public void handleMouseReleased(int x, int y){
-        System.out.println("Window manager - Mouse released with x " + x + " and y " + y);
-        currentActiveWindow = null;
-    }
-
-    public void handleMousePressed(int x, int y){
-        System.out.println("Window manager - Mouse pressed with x " + x + " and y " + y);
-    }
-
     private void setActiveWindow(int x, int y){
+        //get copy of list of windows
         listWindows = windowSystem.getListWindows();
+        //iterate through the windows (backwards since element on tail are on top) and search for one which contains x,y coords
         for(int i=listWindows.size()-1; i >= 0 ;i--){
            SimpleWindow window = listWindows.get(i);
            if((window.getLeftTopX() < x && x < window.getLeftTopX() + window.getWidth())
@@ -120,4 +148,22 @@ public class WindowManager  {
            }
        }
     }
+
+//    boolean isClose(int x , int y,SimpleWindow window){
+//
+//        boolean isClose = false;
+//        List<RectangleComponent> components =  window.getRectangleComponents();
+//        for(int i = components.size()-1;i>=0;i--){
+//            RectangleComponent component = components.get(i);
+//            if(window.getLeftTopX()+window.getWidth()-20 <  component.getX()
+//                    && component.getX() < window.getLeftTopX()+20
+//                    && window.getLeftTopY() < component.getY()
+//                    && component.getY() < window.getLeftTopY() + 20)
+//            {isClose = true;
+//             break;}
+//
+//        }
+//        if (isClose){return true;}
+//        else {return false;}
+//    }
 }
