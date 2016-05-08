@@ -67,6 +67,8 @@ public class WindowManager  {
         //add close button
         RectangleComponent closeButton = new RectangleComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,
                 closeButtonHeight, closeButtonColor);
+        closeButton.setIsButton(true);
+        closeButton.setValue(ButtonValue.CLOSE);
         t.addNewComponent(closeButton);
 
         windowSystem.requestRepaint();
@@ -149,7 +151,9 @@ public class WindowManager  {
     */
     public void dragWindow(int xDifference, int yDifference){
         System.out.println("Differences : " + xDifference + " " + yDifference);
+
         if(currentActiveWindow != null){
+
             int currentActiveWindowLeftTopX = currentActiveWindow.getLeftTopX();
             int currentActiveWindowLeftTopY = currentActiveWindow.getLeftTopY();
 
@@ -160,21 +164,10 @@ public class WindowManager  {
         }
     }
 
-//    boolean isClose(int x , int y,SimpleWindow window){
-//
-//        boolean isClose = false;
-//        List<RectangleComponent> components =  window.getRectangleComponents();
-//        for(int i = components.size()-1;i>=0;i--){
-//            RectangleComponent component = components.get(i);
-//            if(window.getLeftTopX()+window.getWidth()-20 <  component.getX()
-//                    && component.getX() < window.getLeftTopX()+20
-//                    && window.getLeftTopY() < component.getY()
-//                    && component.getY() < window.getLeftTopY() + 20)
-//            {isClose = true;
-//             break;}
-//
-//        }
-//        if (isClose){return true;}
-//        else {return false;}
-//    }
+    private void handleButtonValue(ButtonValue buttonValue, WindowSystem window){
+        if(buttonValue == ButtonValue.CLOSE){
+            //remove window from list if button is close button
+            windowSystem.getListWindows().remove(window);
+        }
+    }
 }
