@@ -81,27 +81,28 @@ public class WindowManager  {
             setActiveWindow(x,y);
         }
 
-        List<RectangleComponent> windowComponents = currentActiveWindow.getRectangleComponents();
+        if(currentActiveWindow != null){
+            List<RectangleComponent> windowComponents = currentActiveWindow.getRectangleComponents();
 
-        //search for clickable component in coordinate x&y, iterate backwards from the most top
-        for(int i=windowComponents.size()-1; i >= 0 ;i--){
-           RectangleComponent currentComponent = windowComponents.get(i);
-           int componentLeftX = (int)currentComponent.getX();
-           int componentRightX = componentLeftX + (int)currentComponent.getWidth();
-           int componentTopY = (int)currentComponent.getY();
-           int componentBottomY = componentTopY + (int)currentComponent.getHeight();
+            //search for clickable component in coordinate x&y, iterate backwards from the most top
+            for(int i=windowComponents.size()-1; i >= 0 ;i--){
+               RectangleComponent currentComponent = windowComponents.get(i);
+               int componentLeftX = (int)currentComponent.getX();
+               int componentRightX = componentLeftX + (int)currentComponent.getWidth();
+               int componentTopY = (int)currentComponent.getY();
+               int componentBottomY = componentTopY + (int)currentComponent.getHeight();
 
-           if((componentLeftX < x && x < componentRightX)
-                   && (componentTopY < y && y < componentBottomY) 
-                   && currentComponent.isButton())
-           {
-               System.out.println("component found with value " + currentComponent.getValue());
-               handleButton(currentComponent.getValue(), currentActiveWindow);
-               break;   
+               if((componentLeftX < x && x < componentRightX)
+                       && (componentTopY < y && y < componentBottomY) 
+                       && currentComponent.isButton())
+               {
+                   System.out.println("component found with value " + currentComponent.getValue());
+                   handleButton(currentComponent.getValue(), currentActiveWindow);
+                   break;   
+               }
            }
-       }
-
-       currentActiveWindow = null;
+           currentActiveWindow = null;
+        }
     }
 
     public void handleMouseDragged(int x, int y){
