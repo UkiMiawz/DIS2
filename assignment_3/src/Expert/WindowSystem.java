@@ -90,6 +90,8 @@ public class WindowSystem extends GraphicsEventSystem{
 
             //drawing window squares and border
             super.setColor(t.getFrameColorWindow());
+            super.drawRect(leftTopX-2 , leftTopY-2, rightBottomX+1, rightBottomY+1);
+            super.setColor(Color.WHITE);
             super.drawRect(leftTopX-1 , leftTopY-1, rightBottomX, rightBottomY);
             super.setColor(t.getFillColorWindow());
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
