@@ -167,13 +167,7 @@ public class WindowManager  {
         System.out.println("Differences : " + xDifference + " " + yDifference);
 
         if(currentActiveWindow != null){
-
-            int currentActiveWindowLeftTopX = currentActiveWindow.getLeftTopX();
-            int currentActiveWindowLeftTopY = currentActiveWindow.getLeftTopY();
-
-            currentActiveWindow.setLeftTopX(currentActiveWindowLeftTopX + xDifference);
-            currentActiveWindow.setLeftTopY(currentActiveWindowLeftTopY + yDifference);
-            currentActiveWindow.redrawComponents(xDifference, yDifference);
+            currentActiveWindow.moveWindow(xDifference, yDifference);
             windowSystem.requestRepaint();
         }
     }

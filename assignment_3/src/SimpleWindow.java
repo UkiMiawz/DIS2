@@ -64,7 +64,15 @@ public class SimpleWindow{
     public List<RectangleComponent> getRectangleComponents(){ return rectangleComponents; }
     public void resetComponents(){ rectangleComponents = new ArrayList<RectangleComponent>(); }
 
-    public void redrawComponents(int xDifference, int yDifference){
+    /*
+    * Handle this window movement
+    * Move all components together with window
+    */
+    public void moveWindow(int xDifference, int yDifference){
+        //move window position
+        leftTopY += yDifference;
+        leftTopX += xDifference;
+        //move all components in window position
         for(RectangleComponent component:rectangleComponents){
             component.setLocation((int)component.getX() + xDifference, (int)component.getY() + yDifference);
         }
