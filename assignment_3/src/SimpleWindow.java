@@ -66,4 +66,10 @@ public class SimpleWindow{
     public void addNewComponent(RectangleComponent newComponent){ rectangleComponents.add(newComponent); }
     public List<RectangleComponent> getRectangleComponents(){ return rectangleComponents; }
     public void resetComponents(){ rectangleComponents = new ArrayList<RectangleComponent>(); }
+
+    public void redrawComponents(int xDifference, int yDifference){
+        for(RectangleComponent component:rectangleComponents){
+            component.setLocation((int)component.getX() + xDifference, (int)component.getY() + yDifference);
+        }
+    }
 }

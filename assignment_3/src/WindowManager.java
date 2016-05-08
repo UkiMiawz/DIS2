@@ -93,7 +93,9 @@ public class WindowManager  {
         int xDifference = x - lastMouseX;
         int yDifference = y - lastMouseY;
         System.out.println("Window manager - Mouse dragged with x " + x + " and y " + y);
-        setActiveWindow(x,y);
+        if(currentActiveWindow == null){
+            setActiveWindow(x,y);
+        }
         dragWindow(xDifference, yDifference);
         lastMouseX = x;
         lastMouseY = y;
@@ -109,7 +111,10 @@ public class WindowManager  {
         lastMouseY = y;
         lastMouseX = x;
 
-        setActiveWindow(x, y);
+        if(currentActiveWindow == null){
+            setActiveWindow(x,y);
+        }
+
         if(currentActiveWindow != null){
             //reorder window
             windowSystem.getListWindows().remove(currentActiveWindow);
@@ -120,6 +125,9 @@ public class WindowManager  {
         currentActiveWindow = null;
     }
 
+    /*
+    * Check for window positioned in the current x&y coordinate
+    */
     private void setActiveWindow(int x, int y){
         //get copy of list of windows
         listWindows = windowSystem.getListWindows();
@@ -136,6 +144,9 @@ public class WindowManager  {
        }
     }
 
+    /*
+    * Move current active window based on differences in position
+    */
     public void dragWindow(int xDifference, int yDifference){
         System.out.println("Differences : " + xDifference + " " + yDifference);
         if(currentActiveWindow != null){
@@ -144,8 +155,8 @@ public class WindowManager  {
 
             currentActiveWindow.setLeftTopX(currentActiveWindowLeftTopX + xDifference);
             currentActiveWindow.setLeftTopY(currentActiveWindowLeftTopY + yDifference);
-            currentActiveWindow.resetComponents();
-            redrawWindow(currentActiveWindow);
+            currentActiveWindow.redrawComponents(xDifference, yDifference);
+            windowSystem.requestRepaint();
         }
     }
 
