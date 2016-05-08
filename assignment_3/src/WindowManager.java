@@ -29,6 +29,9 @@ public class WindowManager  {
 
     private SimpleWindow currentActiveWindow;
 
+    private int lastMouseX;
+    private int lastMouseY;
+
     public Color getShadowColor(){ return shadowColor; }
 
     /*
@@ -45,10 +48,6 @@ public class WindowManager  {
         t.setFillColorWindowColor(windowColor);
 
         //add header bar
-        System.out.println("Adding header bar to window " + t.getTitle());
-        System.out.println("Window properties " + t.getLeftTopX() + " " + t.getLeftTopY() + " " 
-            + t.getWidth() + " " + t.getHeight());
-
         int titleBarLeftX = t.getLeftTopX();
         int titleBarLeftY = t.getLeftTopY();
 
@@ -58,7 +57,6 @@ public class WindowManager  {
         int titleY = t.getLeftTopY();
 
         //add title bar
-        System.out.println("Title bar position now " + titleBarLeftX + " " + titleBarLeftY);
         RectangleComponent titleBar = new RectangleComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
             titleBarHeight, headerSquareColor);
         t.addNewComponent(titleBar);
@@ -92,14 +90,13 @@ public class WindowManager  {
     }
 
     public void handleMouseDragged(int x, int y){
+        int xDifference = x - lastMouseX;
+        int yDifference = y - lastMouseY;
         System.out.println("Window manager - Mouse dragged with x " + x + " and y " + y);
         setActiveWindow(x,y);
-        if(currentActiveWindow != null){
-            currentActiveWindow.setLeftTopX(x);
-            currentActiveWindow.setLeftTopY(y);
-            currentActiveWindow.resetComponents();
-            redrawWindow(currentActiveWindow);
-        }
+        dragWindow(xDifference, yDifference);
+        lastMouseX = x;
+        lastMouseY = y;
     }
 
     public void handleMouseReleased(int x, int y){
@@ -109,13 +106,17 @@ public class WindowManager  {
 
     public void handleMousePressed(int x, int y){
         System.out.println("Window manager - Mouse pressed with x " + x + " and y " + y);
+        lastMouseY = y;
+        lastMouseX = x;
+
         setActiveWindow(x, y);
         if(currentActiveWindow != null){
             //reorder window
             windowSystem.getListWindows().remove(currentActiveWindow);
             windowSystem.getListWindows().add(currentActiveWindow);
+            windowSystem.requestRepaint();
         }
-        windowSystem.requestRepaint();
+        
         currentActiveWindow = null;
     }
 
@@ -133,6 +134,19 @@ public class WindowManager  {
                break;   
            }
        }
+    }
+
+    public void dragWindow(int xDifference, int yDifference){
+        System.out.println("Differences : " + xDifference + " " + yDifference);
+        if(currentActiveWindow != null){
+            int currentActiveWindowLeftTopX = currentActiveWindow.getLeftTopX();
+            int currentActiveWindowLeftTopY = currentActiveWindow.getLeftTopY();
+
+            currentActiveWindow.setLeftTopX(currentActiveWindowLeftTopX + xDifference);
+            currentActiveWindow.setLeftTopY(currentActiveWindowLeftTopY + yDifference);
+            currentActiveWindow.resetComponents();
+            redrawWindow(currentActiveWindow);
+        }
     }
 
 //    boolean isClose(int x , int y,SimpleWindow window){

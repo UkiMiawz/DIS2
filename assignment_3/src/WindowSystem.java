@@ -84,28 +84,27 @@ public class WindowSystem extends GraphicsEventSystem{
 
             //draw shadow first
             if(windowManager != null){
-                System.out.println("Drawing window shadow for " + t.getTitle());
                 super.setColor(windowManager.getShadowColor());
                 super.fillRect(t.getLeftTopX()+15 , t.getLeftTopY()+15, t.getRightBottomX()+10, t.getRightBottomY()+10);
             }
 
-            System.out.println("drawing window rectangle");
+            //drawing window squares and border
             super.setColor(t.getFrameColorWindow());
             super.drawRect(leftTopX-1 , leftTopY-1, rightBottomX, rightBottomY);
             super.setColor(t.getFillColorWindow());
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
 
-            //draw rectangle components
+            //draw current window components
             for(RectangleComponent rectangleComponent:t.getRectangleComponents()){
-                System.out.println("drawing rectangle components of window " + t.getTitle());
 
+                //draw all the rectangle components
                 super.setColor(rectangleComponent.getColor());
                 super.fillRect(rectangleComponent.getX(), rectangleComponent.getY(), 
                     rectangleComponent.getX() + rectangleComponent.getWidth(), 
                     rectangleComponent.getY() + rectangleComponent.getHeight());
 
+                //draw the title of the window
                 rectangleComponent.setString(t.getTitle());
-                System.out.println("drawing title of window " + t.getTitle());
                 super.setColor(Color.black);
                 super.drawString(rectangleComponent.getString(), t.getLeftTopX() + 10, t.getLeftTopY() + 15);
             }
