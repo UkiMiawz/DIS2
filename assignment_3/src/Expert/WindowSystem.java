@@ -82,7 +82,15 @@ public class WindowSystem extends GraphicsEventSystem{
             int rightBottomX = t.getRightBottomX();
             int rightBottomY = t.getRightBottomY();
 
-            //drawing window squares
+            //draw shadow first
+            if(windowManager != null){
+                super.setColor(windowManager.getShadowColor());
+                super.fillRect(t.getLeftTopX()+15 , t.getLeftTopY()+15, t.getRightBottomX()+10, t.getRightBottomY()+10);
+            }
+
+            //drawing window squares and border
+            super.setColor(t.getFrameColorWindow());
+            super.drawRect(leftTopX-1 , leftTopY-1, rightBottomX, rightBottomY);
             super.setColor(t.getFillColorWindow());
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
 
