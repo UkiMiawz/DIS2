@@ -76,19 +76,32 @@ public class WindowManager  {
 
     public void handleMouseClicked(int x, int y){
         System.out.println("Window manager - Mouse clicked with x " + x + " and y " + y);
-        //setActiveWindow(x, y);
-        //if(currentActiveWindow != null){
-            //reorder window
-          //  windowSystem.getListWindows().remove(currentActiveWindow);
-           // windowSystem.getListWindows().add(currentActiveWindow);
-        //}
-        //windowSystem.requestRepaint();
-        //currentActiveWindow = null;
-//        setActiveWindow(x,y);
-//        SimpleWindow window = listWindows.get(listWindows.size()-1);
-//        if(isClose(x,y,window)){ listWindows.remove(listWindows.size()-1);
-//            System.out.print("That is Close button on" + x + " " + y);}
-//        windowSystem.requestRepaint();
+        
+        if(currentActiveWindow == null){
+            setActiveWindow(x,y);
+        }
+
+        List<RectangleComponent> windowComponents = currentActiveWindow.getRectangleComponents();
+
+        //search for clickable component in coordinate x&y, iterate backwards from the most top
+        for(int i=windowComponents.size()-1; i >= 0 ;i--){
+           RectangleComponent currentComponent = windowComponents.get(i);
+           int componentLeftX = (int)currentComponent.getX();
+           int componentRightX = componentLeftX + (int)currentComponent.getWidth();
+           int componentTopY = (int)currentComponent.getY();
+           int componentBottomY = componentTopY + (int)currentComponent.getHeight();
+
+           if((componentLeftX < x && x < componentRightX)
+                   && (componentTopY < y && y < componentBottomY) 
+                   && currentComponent.isButton())
+           {
+               System.out.println("component found with value " + currentComponent.getValue());
+               handleButton(currentComponent.getValue(), currentActiveWindow);
+               break;   
+           }
+       }
+
+       currentActiveWindow = null;
     }
 
     public void handleMouseDragged(int x, int y){
@@ -164,10 +177,12 @@ public class WindowManager  {
         }
     }
 
-    private void handleButtonValue(ButtonValue buttonValue, WindowSystem window){
-        if(buttonValue == ButtonValue.CLOSE){
-            //remove window from list if button is close button
-            windowSystem.getListWindows().remove(window);
+    private void handleButton(ButtonValue buttonValue, SimpleWindow window){
+        switch(buttonValue){
+            case CLOSE:
+                windowSystem.getListWindows().remove(window);
+                break;
         }
+        windowSystem.requestRepaint();
     }
 }
