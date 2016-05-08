@@ -65,4 +65,5 @@ public class SimpleWindow{
     //setter getter for simple window components
     public void addNewComponent(RectangleComponent newComponent){ rectangleComponents.add(newComponent); }
     public List<RectangleComponent> getRectangleComponents(){ return rectangleComponents; }
+    public void resetComponents(){ rectangleComponents = new ArrayList<RectangleComponent>(); }
 }

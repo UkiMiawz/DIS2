@@ -39,16 +39,8 @@ public class WindowManager  {
     }
 
     /*
-    * Redraw all windows in the list
+    * Add all components to a window
     */
-    public void redrawAllWindows(){
-            listWindows = windowSystem.getListWindows();
-
-            for (SimpleWindow t:listWindows) {
-                redrawWindow(t);
-            }
-    }
-
     public void redrawWindow(SimpleWindow t){
         t.setFillColorWindowColor(windowColor);
 
@@ -105,6 +97,7 @@ public class WindowManager  {
         if(currentActiveWindow != null){
             currentActiveWindow.setLeftTopX(x);
             currentActiveWindow.setLeftTopY(y);
+            currentActiveWindow.resetComponents();
             redrawWindow(currentActiveWindow);
         }
     }
