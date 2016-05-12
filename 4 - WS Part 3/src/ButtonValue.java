@@ -1,3 +1,4 @@
 public enum ButtonValue{
-	CLOSE
+	CLOSE,
+	HEADER
 }

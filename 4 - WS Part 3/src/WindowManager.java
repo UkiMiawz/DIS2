@@ -33,6 +33,7 @@ public class WindowManager  {
 
     private int lastMouseX;
     private int lastMouseY;
+    private Boolean isDragging;
 
     public Color getShadowColor(){ return shadowColor; }
 
@@ -64,6 +65,9 @@ public class WindowManager  {
         titleBar.setString(t.getTitle());
         titleBar.setStringColor(headerStringColor);
         titleBar.setStringPadding(10, 15);
+        //set it to a button
+        titleBar.setIsButton(true);
+        titleBar.setValue(ButtonValue.HEADER);
         t.addNewComponent(titleBar);
 
         int closeButtonLeftX = t.getRightBottomX() - closeButtonWidth;
@@ -88,45 +92,26 @@ public class WindowManager  {
         if(currentActiveWindow == null){
             setActiveWindow(x,y);
         }
-
-        if(currentActiveWindow != null){
-            List<RectangleComponent> windowComponents = currentActiveWindow.getRectangleComponents();
-
-            //search for clickable component in coordinate x&y, iterate backwards from the most top
-            for(int i=windowComponents.size()-1; i >= 0 ;i--){
-               RectangleComponent currentComponent = windowComponents.get(i);
-               int componentLeftX = (int)currentComponent.getX();
-               int componentRightX = componentLeftX + (int)currentComponent.getWidth();
-               int componentTopY = (int)currentComponent.getY();
-               int componentBottomY = componentTopY + (int)currentComponent.getHeight();
-
-               if((componentLeftX < x && x < componentRightX)
-                       && (componentTopY < y && y < componentBottomY) 
-                       && currentComponent.isButton())
-               {
-                   System.out.println("component found with value " + currentComponent.getValue());
-                   handleButton(currentComponent.getValue(), currentActiveWindow);
-                   break;   
-               }
-           }
-           currentActiveWindow = null;
-        }
+        searchForActiveButton(x, y);
+        currentActiveWindow = null;
     }
 
     public void handleMouseDragged(int x, int y){
-        int xDifference = x - lastMouseX;
-        int yDifference = y - lastMouseY;
         System.out.println("Window manager - Mouse dragged with x " + x + " and y " + y);
         if(currentActiveWindow == null){
             setActiveWindow(x,y);
         }
-        dragWindow(xDifference, yDifference);
+        
+        if(isDragging)
+            dragWindow(x, y);
+
         lastMouseX = x;
         lastMouseY = y;
     }
 
     public void handleMouseReleased(int x, int y){
         System.out.println("Window manager - Mouse released with x " + x + " and y " + y);
+        isDragging = false;
         currentActiveWindow = null;
     }
 
@@ -145,8 +130,8 @@ public class WindowManager  {
             windowSystem.getListWindows().add(currentActiveWindow);
             windowSystem.requestRepaint();
         }
-        
-        currentActiveWindow = null;
+
+        searchForActiveButton(x, y);
     }
 
     /*
@@ -171,21 +156,57 @@ public class WindowManager  {
     /*
     * Move current active window based on differences in position
     */
-    public void dragWindow(int xDifference, int yDifference){
-        System.out.println("Differences : " + xDifference + " " + yDifference);
+    public void dragWindow(int x, int y){
+        
+        int xDifference = x - lastMouseX;
+        int yDifference = y - lastMouseY;
 
         if(currentActiveWindow != null){
+            System.out.println("Drag window with difference x " + xDifference);
             currentActiveWindow.moveWindow(xDifference, yDifference);
             windowSystem.requestRepaint();
         }
     }
 
-    private void handleButton(ButtonValue buttonValue, SimpleWindow window){
+    /*
+    * Handle button action based on button value
+    */
+    private void handleButton(ButtonValue buttonValue, SimpleWindow window, int x, int y){
         switch(buttonValue){
             case CLOSE:
                 windowSystem.getListWindows().remove(window);
                 break;
+            case HEADER:
+                isDragging = true;
+                dragWindow(x, y);
+                break;
         }
         windowSystem.requestRepaint();
+    }
+
+    public void searchForActiveButton(int x, int y){
+
+        if(currentActiveWindow != null){
+            List<RectangleComponent> windowComponents = currentActiveWindow.getRectangleComponents();
+
+            //search for clickable component in coordinate x&y, iterate backwards from the most top
+            for(int i=windowComponents.size()-1; i >= 0 ;i--){
+               RectangleComponent currentComponent = windowComponents.get(i);
+               int componentLeftX = (int)currentComponent.getX();
+               int componentRightX = componentLeftX + (int)currentComponent.getWidth();
+               int componentTopY = (int)currentComponent.getY();
+               int componentBottomY = componentTopY + (int)currentComponent.getHeight();
+
+               if((componentLeftX < x && x < componentRightX)
+                       && (componentTopY < y && y < componentBottomY) 
+                       && currentComponent.isButton())
+               {
+                   System.out.println("component found with value " + currentComponent.getValue());
+                   handleButton(currentComponent.getValue(), currentActiveWindow, x, y);
+                   break;   
+               }
+           }
+           currentActiveWindow = null;
+        }
     }
 }
