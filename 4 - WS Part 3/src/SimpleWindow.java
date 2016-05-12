@@ -21,6 +21,9 @@ public class SimpleWindow{
     private Color fillColorWindow = Color.GREEN;
     private Color frameColorWindow = Color.BLACK;
 
+    //one window can only have one widget
+    private RATWidget widget;
+
     //components list
     private List<WindowComponent> rectangleComponents;
 
