@@ -19,6 +19,7 @@ public class SimpleWindow{
     //window title
     private String title;
     private Color fillColorWindow = Color.GREEN;
+    private Color frameColorWindow = Color.BLACK;
 
     //components list
     private List<RectangleComponent> rectangleComponents;
@@ -42,6 +43,7 @@ public class SimpleWindow{
     public UUID getId(){ return id; }
     public String getTitle(){ return title; }
     public Color getFillColorWindow(){ return fillColorWindow; }
+    public Color getFrameColorWindow() {return frameColorWindow; }
 
     public int getLeftTopX(){ return leftTopX; }
     public int getLeftTopY(){ return leftTopY; }
@@ -53,6 +55,7 @@ public class SimpleWindow{
     //setter
     public void setIndex(int value){ indexValue = value; }
     public void setFillColorWindowColor(Color value){ fillColorWindow = value; }
+    public void setFrameColorWindow(Color value) {frameColorWindow = value;}
 
     public void setLeftTopX(int value){ leftTopX = value; }
     public void setLeftTopY(int value){ leftTopY = value; }

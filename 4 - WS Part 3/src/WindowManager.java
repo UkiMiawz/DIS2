@@ -19,8 +19,11 @@ public class WindowManager  {
     private int titleY;
 
     private final Color headerSquareColor = Color.orange;
+    private final Color headerStringColor = Color.BLACK;
     private final Color windowColor = Color.WHITE;
     private final Color closeButtonColor = Color.RED;
+    private final Color closeButtonStringColor = Color.WHITE;
+    private Color shadowColor = new Color(0f,0f,0f,.5f);
 
     private final int titleBarHeight = 20;
     private final int closeButtonHeight = 20;
@@ -30,6 +33,8 @@ public class WindowManager  {
 
     private int lastMouseX;
     private int lastMouseY;
+
+    public Color getShadowColor(){ return shadowColor; }
 
     /*
     * Constructor
@@ -56,6 +61,9 @@ public class WindowManager  {
         //add title bar
         RectangleComponent titleBar = new RectangleComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
             titleBarHeight, headerSquareColor);
+        titleBar.setString(t.getTitle());
+        titleBar.setStringColor(headerStringColor);
+        titleBar.setStringPadding(10, 15);
         t.addNewComponent(titleBar);
 
         int closeButtonLeftX = t.getRightBottomX() - closeButtonWidth;
@@ -64,6 +72,9 @@ public class WindowManager  {
         //add close button
         RectangleComponent closeButton = new RectangleComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,
                 closeButtonHeight, closeButtonColor);
+        closeButton.setString("X");
+        closeButton.setStringColor(closeButtonStringColor);
+        closeButton.setStringPadding(7,15);
         closeButton.setIsButton(true);
         closeButton.setValue(ButtonValue.CLOSE);
         t.addNewComponent(closeButton);
@@ -123,6 +134,19 @@ public class WindowManager  {
         System.out.println("Window manager - Mouse pressed with x " + x + " and y " + y);
         lastMouseY = y;
         lastMouseX = x;
+
+        if(currentActiveWindow == null){
+            setActiveWindow(x,y);
+        }
+
+        if(currentActiveWindow != null){
+            //reorder window
+            windowSystem.getListWindows().remove(currentActiveWindow);
+            windowSystem.getListWindows().add(currentActiveWindow);
+            windowSystem.requestRepaint();
+        }
+        
+        currentActiveWindow = null;
     }
 
     /*
