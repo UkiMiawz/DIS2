@@ -60,7 +60,7 @@ public class WindowManager  {
         int titleY = t.getLeftTopY();
 
         //add title bar
-        RectangleComponent titleBar = new RectangleComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
+        WindowComponent titleBar = new WindowComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
             titleBarHeight, headerSquareColor);
         titleBar.setString(t.getTitle());
         titleBar.setStringColor(headerStringColor);
@@ -74,7 +74,7 @@ public class WindowManager  {
         int closeButtonLeftY = t.getLeftTopY();
 
         //add close button
-        RectangleComponent closeButton = new RectangleComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,
+        WindowComponent closeButton = new WindowComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,
                 closeButtonHeight, closeButtonColor);
         closeButton.setString("X");
         closeButton.setStringColor(closeButtonStringColor);
@@ -187,11 +187,11 @@ public class WindowManager  {
     public void searchForActiveButton(int x, int y){
 
         if(currentActiveWindow != null){
-            List<RectangleComponent> windowComponents = currentActiveWindow.getRectangleComponents();
+            List<WindowComponent> windowComponents = currentActiveWindow.getRectangleComponents();
 
             //search for clickable component in coordinate x&y, iterate backwards from the most top
             for(int i=windowComponents.size()-1; i >= 0 ;i--){
-               RectangleComponent currentComponent = windowComponents.get(i);
+               WindowComponent currentComponent = windowComponents.get(i);
                int componentLeftX = (int)currentComponent.getX();
                int componentRightX = componentLeftX + (int)currentComponent.getWidth();
                int componentTopY = (int)currentComponent.getY();

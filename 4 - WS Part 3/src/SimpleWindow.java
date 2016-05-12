@@ -22,7 +22,7 @@ public class SimpleWindow{
     private Color frameColorWindow = Color.BLACK;
 
     //components list
-    private List<RectangleComponent> rectangleComponents;
+    private List<WindowComponent> rectangleComponents;
 
     public SimpleWindow(int leftTopX, int leftTopY, int width, int height, String title){
         
@@ -35,7 +35,7 @@ public class SimpleWindow{
         this.id = UUID.randomUUID();
 
         //instantiate component list
-        rectangleComponents = new ArrayList<RectangleComponent>();
+        rectangleComponents = new ArrayList<WindowComponent>();
     }
 
     //getter
@@ -63,9 +63,9 @@ public class SimpleWindow{
     public void setWidth(int value){ width = value; }
 
     //setter getter for simple window components
-    public void addNewComponent(RectangleComponent newComponent){ rectangleComponents.add(newComponent); }
-    public List<RectangleComponent> getRectangleComponents(){ return rectangleComponents; }
-    public void resetComponents(){ rectangleComponents = new ArrayList<RectangleComponent>(); }
+    public void addNewComponent(WindowComponent newComponent){ rectangleComponents.add(newComponent); }
+    public List<WindowComponent> getRectangleComponents(){ return rectangleComponents; }
+    public void resetComponents(){ rectangleComponents = new ArrayList<WindowComponent>(); }
 
     /*
     * Handle this window movement
@@ -76,7 +76,7 @@ public class SimpleWindow{
         leftTopY += yDifference;
         leftTopX += xDifference;
         //move all components in window position
-        for(RectangleComponent component:rectangleComponents){
+        for(WindowComponent component:rectangleComponents){
             component.setLocation((int)component.getX() + xDifference, (int)component.getY() + yDifference);
         }
     }

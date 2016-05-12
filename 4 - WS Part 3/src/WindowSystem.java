@@ -97,7 +97,7 @@ public class WindowSystem extends GraphicsEventSystem{
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
 
             //draw current window components
-            for(RectangleComponent rectangleComponent:t.getRectangleComponents()){
+            for(WindowComponent rectangleComponent:t.getRectangleComponents()){
 
                 //draw all the rectangle components
                 super.setColor(rectangleComponent.getColor());
