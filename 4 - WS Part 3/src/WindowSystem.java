@@ -110,13 +110,17 @@ public class WindowSystem extends GraphicsEventSystem{
                     rectangleComponent.getX() + rectangleComponent.getWidth(), 
                     rectangleComponent.getY() + rectangleComponent.getHeight());
 
-                //draw the title of the window
+                //draw the string property of the component
                 rectangleComponent.setString(rectangleComponent.getString());
                 super.setColor(rectangleComponent.getStringColor());
                 super.drawString(rectangleComponent.getString(), 
                     rectangleComponent.getX() + rectangleComponent.getStringPaddingLeft(), 
                     rectangleComponent.getY() + rectangleComponent.getStringPaddingTop());
             }
+
+            //draw widget
+            RATWidget windowWidget = t.getWidget();
+
         }
     }
 

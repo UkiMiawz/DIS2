@@ -144,8 +144,9 @@ public class WindowManager  {
         //iterate through the windows (backwards since element on tail are on top) and search for one which contains x,y coords
         for(int i=listWindows.size()-1; i >= 0 ;i--){
            SimpleWindow window = listWindows.get(i);
+           //don't forget to calculate header which outside of window coordinate
            if((window.getLeftTopX() < x && x < window.getLeftTopX() + window.getWidth())
-                   && (window.getLeftTopY() < y && y < window.getLeftTopY()+window.getHeight()) )
+                   && (window.getLeftTopY() - titleBarHeight < y && y < window.getLeftTopY() + window.getHeight()) )
            {
                System.out.println("window found " + window.getId());
                currentActiveWindow = window;
