@@ -94,6 +94,7 @@ public class WindowManager  {
             setActiveWindow(x,y);
         }
         searchForActiveButton(x, y);
+        searchForWidgetButton(x, y);
         currentActiveWindow = null;
     }
 
@@ -186,7 +187,7 @@ public class WindowManager  {
         windowSystem.requestRepaint();
     }
 
-    public void searchForActiveButton(int x, int y){
+    private void searchForActiveButton(int x, int y){
 
         if(currentActiveWindow != null){
             List<WindowComponent> windowComponents = currentActiveWindow.getRectangleComponents();
@@ -208,7 +209,34 @@ public class WindowManager  {
                    break;   
                }
            }
-           currentActiveWindow = null;
+        }
+    }
+
+    private void searchForWidgetButton(int x, int y){
+
+        if(currentActiveWindow != null){
+
+            RATWidget windowWidget = currentActiveWindow.getWidget();
+            if(windowWidget != null){
+                List<RATButton> widgetButtons = windowWidget.getRatButtons();
+                for(int i=widgetButtons.size()-1; i >= 0 ;i--){
+
+                   RATButton currentComponent = widgetButtons.get(i);
+
+                   int componentLeftX = (int)currentComponent.getX();
+                   int componentRightX = componentLeftX + (int)currentComponent.getWidth();
+                   int componentTopY = (int)currentComponent.getY();
+                   int componentBottomY = componentTopY + (int)currentComponent.getHeight();
+
+                   if((componentLeftX < x && x < componentRightX)
+                           && (componentTopY < y && y < componentBottomY))
+                   {
+                       System.out.println("RAT button found with value " + currentComponent.getValue());
+                       currentComponent.triggerListener();
+                       break;   
+                   }
+               }    
+            }
         }
     }
 }

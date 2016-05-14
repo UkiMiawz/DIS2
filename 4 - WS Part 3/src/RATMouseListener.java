@@ -1,4 +1,4 @@
 public interface RATMouseListener
 {
- 	public void mouseClicked(SimpleWindow window, RATWidget widget, RATButton button);
+ 	public void mouseClicked(RATButton button);
 }
