@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 /*
 * Base class for all widgets
 */
 public abstract class RATWidget {
 
+    private UUID id;
 	//RAT components list
     private List<RATButton> ratButtons;
     private List<RATLabel> ratLabels;
@@ -16,39 +18,23 @@ public abstract class RATWidget {
     	ratButtons = new ArrayList<RATButton>();
     	ratLabels = new ArrayList<RATLabel>();
         this.parentWindow = parentWindow;
+        this.id = UUID.randomUUID();
     }
 
     //getter
     public List<RATButton> getRatButtons(){ return ratButtons; }
     public List<RATLabel> getRatLabels(){ return ratLabels; }
+    public UUID getId(){ return id; }
 
     /*
     * The x and y parameters here are relative to parent window position
     */
     public void addNewButton(RATButton ratButton){
-        
-        recalculatePosition(ratButton);
         ratButtons.add(ratButton);
     }
 
     public void addNewLabel(RATLabel ratLabel){
-
-        recalculatePosition(ratLabel);
         ratLabels.add(ratLabel);
-    }
-
-    /*
-    * The x and y parameters here are relative to parent window position
-    */
-    private void recalculatePosition(RATLabel ratLabel){
-
-        //recalculate x&y to be relative with parent window
-        int parentX = parentWindow.getLeftTopX();
-        int parentY = parentWindow.getLeftTopY();
-
-        int xCoordinate = parentX + (int)ratLabel.getX();
-        int yCoordinate = parentY + (int)ratLabel.getY();
-        ratLabel.setLocation(xCoordinate, yCoordinate);
     }
 
     /*

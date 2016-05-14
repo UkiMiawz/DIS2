@@ -39,19 +39,14 @@ public class WindowSystem extends GraphicsEventSystem{
     /*
      * Add new window to simple windows
      */
-    public SimpleWindow addNewWindow(float startX, float startY, int width, int height, String title){
-
-        System.out.println("Add new window with properties vector: " + startX + " starty: " + startY + 
-                " width: " + width + " height " + height);
+    public SimpleWindow addNewWindow(SimpleWindow newWindow){
 
         //calculate in coordinates
-        int intStartX = setX(startX);
-        int intStartY = setY(startY);
+        int intStartX = setX(newWindow.getRelativeLetfTopX());
+        int intStartY = setY(newWindow.getRelativeLetfTopY());
 
-        System.out.println("Add new window with coordinates startx: " + intStartX + " starty: " + intStartY + 
-                " width: " + width + " height " + height);
-
-        SimpleWindow newWindow = new SimpleWindow(intStartX, intStartY, width,  height, title);
+        //set x & y of new simple window
+        newWindow.moveWindow(intStartX, intStartY);
         simpleWindows.add(newWindow);
         System.out.println("Windows list count now " + simpleWindows.size());
 
@@ -109,12 +104,12 @@ public class WindowSystem extends GraphicsEventSystem{
 
             //draw widget
             RATWidget windowWidget = t.getWidget();
-            for(RATLabel component:windowWidget.getRatButtons()){
+            for(RATButton component:windowWidget.getRatButtons()){
                 //draw all the rectangle components
                 drawComponent(component);
             }
 
-            for(RATLabel component:windowWidget.getRatButtons()){
+            for(RATLabel component:windowWidget.getRatLabels()){
                 //draw all the rectangle components
                 drawComponent(component);
             }

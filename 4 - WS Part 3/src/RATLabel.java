@@ -1,7 +1,6 @@
 import java.awt.Rectangle;
 import java.awt.Color;
 
-
 public class RATLabel extends Rectangle{
 	
 	private Color myColor;

@@ -10,6 +10,9 @@ public class SimpleWindow{
     private UUID id;
     private int indexValue;
     
+    private float relativeLeftTopX;
+    private float relativeLeftTopY;
+
     private int leftTopX;
     private int leftTopY;
 
@@ -27,10 +30,10 @@ public class SimpleWindow{
     //components list
     private List<WindowComponent> rectangleComponents;
 
-    public SimpleWindow(int leftTopX, int leftTopY, int width, int height, String title){
+    public SimpleWindow(float relativeLeftTopX, float relativeLeftTopY, int width, int height, String title){
         
-        this.leftTopX = leftTopX;
-        this.leftTopY = leftTopY;
+        this.relativeLeftTopX = relativeLeftTopX;
+        this.relativeLeftTopY = relativeLeftTopY;
         this.height = height;
         this.width = width;
         this.title = title;
@@ -47,6 +50,9 @@ public class SimpleWindow{
     public String getTitle(){ return title; }
     public Color getFillColorWindow(){ return fillColorWindow; }
     public Color getFrameColorWindow() {return frameColorWindow; }
+
+    public float getRelativeLetfTopX(){ return relativeLeftTopX; }
+    public float getRelativeLetfTopY(){ return relativeLeftTopY; }
 
     public int getLeftTopX(){ return leftTopX; }
     public int getLeftTopY(){ return leftTopY; }
@@ -85,5 +91,7 @@ public class SimpleWindow{
         for(WindowComponent component:rectangleComponents){
             component.setLocation((int)component.getX() + xDifference, (int)component.getY() + yDifference);
         }
+        //move widget
+        widget.moveWidget(xDifference, yDifference);
     }
 }
