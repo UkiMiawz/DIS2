@@ -3,7 +3,7 @@ import java.util.List;
 /*
 * Base class for all widgets
 */
-public abstract class RATWidget implements RATMouseListener {
+public abstract class RATWidget {
 
 	//RAT components list
     private List<RATButton> ratButtons;
@@ -18,9 +18,9 @@ public abstract class RATWidget implements RATMouseListener {
         this.parentWindow = parentWindow;
     }
 
-    public void mouseClicked(SimpleWindow window, RATWidget widget, RATButton button){
-
-    }
+    //getter
+    public List<RATButton> getRatButtons(){ return ratButtons; }
+    public List<RATLabel> getRatLabels(){ return ratLabels; }
 
     /*
     * The x and y parameters here are relative to parent window position

@@ -102,26 +102,38 @@ public class WindowSystem extends GraphicsEventSystem{
             super.fillRect(leftTopX , leftTopY, rightBottomX, rightBottomY);
 
             //draw current window components
-            for(WindowComponent rectangleComponent:t.getRectangleComponents()){
-
+            for(WindowComponent component:t.getRectangleComponents()){
                 //draw all the rectangle components
-                super.setColor(rectangleComponent.getColor());
-                super.fillRect(rectangleComponent.getX(), rectangleComponent.getY(), 
-                    rectangleComponent.getX() + rectangleComponent.getWidth(), 
-                    rectangleComponent.getY() + rectangleComponent.getHeight());
-
-                //draw the string property of the component
-                rectangleComponent.setString(rectangleComponent.getString());
-                super.setColor(rectangleComponent.getStringColor());
-                super.drawString(rectangleComponent.getString(), 
-                    rectangleComponent.getX() + rectangleComponent.getStringPaddingLeft(), 
-                    rectangleComponent.getY() + rectangleComponent.getStringPaddingTop());
+                drawComponent(component);
             }
 
             //draw widget
             RATWidget windowWidget = t.getWidget();
+            for(RATLabel component:windowWidget.getRatButtons()){
+                //draw all the rectangle components
+                drawComponent(component);
+            }
 
+            for(RATLabel component:windowWidget.getRatButtons()){
+                //draw all the rectangle components
+                drawComponent(component);
+            }
         }
+    }
+
+    private void drawComponent(RATLabel component){
+        //draw all the rectangle components
+        super.setColor(component.getColor());
+        super.fillRect(component.getX(), component.getY(), 
+            component.getX() + component.getWidth(), 
+            component.getY() + component.getHeight());
+
+        //draw the string property of the component
+        component.setString(component.getString());
+        super.setColor(component.getStringColor());
+        super.drawString(component.getString(), 
+            component.getX() + component.getStringPaddingLeft(), 
+            component.getY() + component.getStringPaddingTop());
     }
 
     @Override
