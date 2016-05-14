@@ -70,6 +70,9 @@ public class SimpleWindow{
     public List<WindowComponent> getRectangleComponents(){ return rectangleComponents; }
     public void resetComponents(){ rectangleComponents = new ArrayList<WindowComponent>(); }
 
+    public void setWidget(RATWidget value){ widget = value; }
+    public RATWidget getWidget(){ return widget; }
+
     /*
     * Handle this window movement
     * Move all components together with window

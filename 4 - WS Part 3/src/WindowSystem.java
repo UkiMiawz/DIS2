@@ -39,7 +39,7 @@ public class WindowSystem extends GraphicsEventSystem{
     /*
      * Add new window to simple windows
      */
-    public void addNewWindow(float startX, float startY, int width, int height, String title){
+    public SimpleWindow addNewWindow(float startX, float startY, int width, int height, String title){
 
         System.out.println("Add new window with properties vector: " + startX + " starty: " + startY + 
                 " width: " + width + " height " + height);
@@ -62,6 +62,8 @@ public class WindowSystem extends GraphicsEventSystem{
         if(windowManager != null){
             windowManager.redrawWindow(newWindow);
         }
+
+        return newWindow;
     }
 
     /*

@@ -3,7 +3,7 @@ import java.util.List;
 /*
 * Base class for all widgets
 */
-public class RATWidget implements RATMouseListener {
+public abstract class RATWidget implements RATMouseListener {
 
 	//RAT components list
     private List<RATButton> buttons;

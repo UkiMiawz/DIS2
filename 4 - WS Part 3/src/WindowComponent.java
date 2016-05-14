@@ -3,7 +3,7 @@ import java.awt.Color;
 /*
 * Base class for all components that is part of a SimpleWindow
 */
-public class WindowComponent extends RectangleComponent{
+public class WindowComponent extends RATLabel{
 	
 	private Boolean isButton;
 	private ButtonValue componentValue;
