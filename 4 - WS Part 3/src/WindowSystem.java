@@ -88,10 +88,13 @@ public class WindowSystem extends GraphicsEventSystem{
             if(windowManager != null){
                 super.setColor(windowManager.getShadowColor());
                 super.fillRect(t.getLeftTopX()+15 , t.getLeftTopY()+15, t.getRightBottomX()+10, t.getRightBottomY()+10);
+                
+                //draw borders
+                int titleBarHeight = windowManager.getTitleBarHeight();
                 super.setColor(t.getFrameColorWindow());
-                super.drawRect(leftTopX-2 , leftTopY-2, rightBottomX+1, rightBottomY+1);
+                super.drawRect(leftTopX-2 , leftTopY-titleBarHeight-2, rightBottomX+1, rightBottomY+1);
                 super.setColor(Color.WHITE);
-                super.drawRect(leftTopX-1 , leftTopY-1, rightBottomX, rightBottomY);
+                super.drawRect(leftTopX-1 , leftTopY-titleBarHeight-1, rightBottomX, rightBottomY);
             }
 
             //drawing window squares and border

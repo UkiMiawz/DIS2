@@ -5,8 +5,11 @@ import java.awt.Color;
 */
 public class RATButton extends RATLabel {
 
-	public RATButton(int startX, int startY, int width, int height, Color myColor){
+	public String value;
+
+	public RATButton(int startX, int startY, int width, int height, Color myColor, String buttonValue){
 		super(startX, startY, width, height, myColor);
+		value = buttonValue;
 	}
 
 }

@@ -1,2 +1,2 @@
 javac -cp ../GES/GES.jar *.java  HelloWorldGraphical.java
-java -cp ../GES/GES.jar:lib/*:. HelloWorldGraphical
+#java -cp ../GES/GES.jar:lib/*:. HelloWorldGraphical

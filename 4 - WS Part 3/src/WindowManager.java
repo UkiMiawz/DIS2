@@ -36,6 +36,7 @@ public class WindowManager  {
     private Boolean isDragging;
 
     public Color getShadowColor(){ return shadowColor; }
+    public int getTitleBarHeight(){ return titleBarHeight; }
 
     /*
     * Constructor
@@ -52,12 +53,12 @@ public class WindowManager  {
 
         //add header bar
         int titleBarLeftX = t.getLeftTopX();
-        int titleBarLeftY = t.getLeftTopY();
+        int titleBarLeftY = t.getLeftTopY() - titleBarHeight;
 
         int titleBarWidth = t.getWidth();
 
         int titleX = t.getLeftTopX();
-        int titleY = t.getLeftTopY();
+        int titleY = t.getLeftTopY() - titleBarHeight;
 
         //add title bar
         WindowComponent titleBar = new WindowComponent(titleBarLeftX, titleBarLeftY, titleBarWidth,
@@ -71,7 +72,7 @@ public class WindowManager  {
         t.addNewComponent(titleBar);
 
         int closeButtonLeftX = t.getRightBottomX() - closeButtonWidth;
-        int closeButtonLeftY = t.getLeftTopY();
+        int closeButtonLeftY = t.getLeftTopY() - titleBarHeight;
 
         //add close button
         WindowComponent closeButton = new WindowComponent(closeButtonLeftX,closeButtonLeftY,closeButtonWidth,

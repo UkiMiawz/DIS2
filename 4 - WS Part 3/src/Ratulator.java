@@ -1,7 +1,7 @@
 public class Ratulator extends RATWidget {
 
-	public Ratulator(){
+	public Ratulator(SimpleWindow parentWindow){
     	//list initialization
-    	super();
+    	super(parentWindow);
     }
 }
