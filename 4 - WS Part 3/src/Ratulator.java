@@ -1,9 +1,13 @@
 import java.awt.Color;
-
+/*
+* Widget for Simple calculator
+*/
 public class Ratulator extends RATWidget {
 
 	private String numberString = "0";
-
+    private double savedCalculation = 0.0;
+    private String lastOperator = "";
+	
 	private final Color labelColor = Color.BLACK;
 	private final Color labelBackground = new Color(0,0,0,0);
 	private final Color buttonColor = Color.GRAY;
@@ -29,7 +33,7 @@ public class Ratulator extends RATWidget {
 	private String specials[] = {"0", "."};
 
 	public Ratulator(SimpleWindow parentWindow){
-    	//list initialization
+    	//super constructor
     	super(parentWindow);
 
     	//create new label
@@ -55,6 +59,7 @@ public class Ratulator extends RATWidget {
 	    	button.setString(Integer.toString(i));
     		button.setStringPadding(buttonHeight/2, buttonWidth/2 - 2);
     		button.setStringColor(buttonStringColor);
+    		button.addListener(new NumberClickListener());
     		super.addNewButton(button);
     		lastX += buttonWidth + buttonMargin;
 
@@ -72,6 +77,7 @@ public class Ratulator extends RATWidget {
 	    	button.setString(special);
     		button.setStringPadding(buttonHeight/2 - 2, buttonWidth/2 - 2);
     		button.setStringColor(buttonStringColor);
+    		button.addListener(new NumberClickListener());
     		super.addNewButton(button);
     		lastX += buttonWidth + buttonMargin;
         }
@@ -81,6 +87,7 @@ public class Ratulator extends RATWidget {
     	equalButton.setString("=");
 		equalButton.setStringPadding(buttonHeight/2 - 2, buttonWidth/2 - 2);
 		equalButton.setStringColor(operatorStringColor);
+		equalButton.addListener(new OperatorClickListener());
 		super.addNewButton(equalButton);
 
         //add other math operators
@@ -92,10 +99,80 @@ public class Ratulator extends RATWidget {
 	    	button.setString(operator);
     		button.setStringPadding(buttonHeight/2 - 2, buttonWidth/2 - 2);
     		button.setStringColor(operatorStringColor);
+    		button.addListener(new OperatorClickListener());
     		super.addNewButton(button);
     		lastY += buttonHeight + buttonMargin;
         }
     }
 
-    //mouse events start here
+    /*
+    * Listener for number buttons
+    */
+    private class NumberClickListener implements RATMouseListener{
+      public void mouseClicked(RATButton e){
+        String command = e.getValue();
+
+        //remove previous calculation when number pressed right after "="
+        if(lastOperator.equals("="))
+           savedCalculation = Double.parseDouble(command);
+
+        //screen empty, start with new number
+        if(numberString.equals("0") || lastOperator.equals("="))
+            numberString = command;
+        else
+            numberString += command;
+        numberLabel.setString(numberString);
+      }     
+   }
+
+   /*
+   * Listener for operator buttons
+   */
+   private class OperatorClickListener implements RATMouseListener{
+      public void mouseClicked(RATButton e){
+        String command = e.getValue();
+        operatorLabel.setString(command);
+
+        //only do calculation if the previous operator is not "="
+        if(!lastOperator.equals("=")){
+            numberString = doCalculation(lastOperator, savedCalculation, Double.parseDouble(numberString));
+            numberLabel.setString(numberString);
+            savedCalculation = Double.parseDouble(numberString);
+        }
+        
+        //start with an empty screen
+        if(!command.equals("="))
+            numberString = "0";
+        lastOperator = command;
+      }
+   }
+
+   /*
+   * Do calculation for all operators
+   */
+   private String doCalculation(String operator, Double firstNumber, Double secondNumber){
+        System.out.println("Do calculation " + Double.toString(firstNumber) + " " 
+            + operator + " " + Double.toString(secondNumber));
+        Double result;
+        switch(operator){
+            case "/":
+                result = firstNumber / secondNumber;
+                break;
+            case "*":
+                result = firstNumber * secondNumber;
+                break;
+            case "-":
+                result = firstNumber - secondNumber;
+                break;
+            case "+":
+                result = firstNumber + secondNumber;
+                break;
+            case "=":
+                result = firstNumber;
+                break;
+            default:
+                result = secondNumber;
+        }
+        return Double.toString(result);
+   }
 }
