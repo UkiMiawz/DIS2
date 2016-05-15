@@ -232,7 +232,7 @@ public class WindowManager  {
                            && (componentTopY < y && y < componentBottomY))
                    {
                        System.out.println("RAT button found with value " + currentComponent.getValue());
-                       currentComponent.triggerListener();
+                       currentComponent.fireListeners(currentComponent,windowSystem);
                        break;   
                    }
                }    
