@@ -104,16 +104,16 @@ public class WindowSystem extends GraphicsEventSystem{
 
             //draw widget
             RATWidget windowWidget = t.getWidget();
-            if (windowWidget!=null){
-            for(RATButton component:windowWidget.getRatButtons()){
-                //draw all the rectangle components
-                drawComponent(component);
+            if(windowWidget != null){
+                for(RATButton component:windowWidget.getRatButtons()){
+                    //draw all the buttons
+                    drawComponent(component);
+                }
+                for(RATLabel component:windowWidget.getRatLabels()){
+                    //draw all the labels
+                    drawComponent(component);
+                }
             }
-
-            for(RATLabel component:windowWidget.getRatLabels()){
-                //draw all the rectangle components
-                drawComponent(component);
-            }}
         }
     }
 

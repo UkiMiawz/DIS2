@@ -21,7 +21,7 @@ public class MyApp{
 
         //create new simple window & set widget
         SimpleWindow babelFishWindow = new SimpleWindow(0.2f, 0.1f, 330, 310, "Hello world and don't panic");
-        RatHelloWorld babelFish = new RatHelloWorld(babelFishWindow);
+        RatHelloWorld babelFish = new RatHelloWorld(babelFishWindow, windowSystem);
         babelFishWindow.setWidget(babelFish);
         windowSystem.addNewWindow(babelFishWindow);
 

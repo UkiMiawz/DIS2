@@ -91,7 +91,9 @@ public class SimpleWindow{
         for(WindowComponent component:rectangleComponents){
             component.setLocation((int)component.getX() + xDifference, (int)component.getY() + yDifference);
         }
-        //move widget
-        widget.moveWidget(xDifference, yDifference);
+
+        if(widget != null)
+            //move widget
+            widget.moveWidget(xDifference, yDifference);
     }
 }

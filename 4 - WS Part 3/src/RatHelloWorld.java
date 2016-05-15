@@ -4,10 +4,10 @@ public class RatHelloWorld extends RATWidget {
 
 	private String greetingString = "Good Day";
 	private RATLabel greetingLabel;
-	private SimpleWindow parentWindow;
+	private RATButton closeButton;
+
+    private SimpleWindow parentWindow;
 	private WindowSystem ws;
-
-
 
 	private final Color labelColor = Color.BLACK;
 	private final Color labelBackground = new Color(0,0,0,0);
@@ -16,6 +16,8 @@ public class RatHelloWorld extends RATWidget {
 	private int buttonWidth = 310;
 	private int buttonHeight = 30;
 
+    private String languages[] = {"Deutsch", "English", "Francais"};
+
 	public RatHelloWorld(SimpleWindow parentWindow, WindowSystem ws){
     	//super constructor
     	super(parentWindow);
@@ -23,69 +25,64 @@ public class RatHelloWorld extends RATWidget {
 		this.ws = ws;
 
     	//create new label
-		greetingLabel = new RATLabel(10, 10, 400, 50, labelBackground);
-    	greetingLabel.setString(greetingString);
-    	greetingLabel.setStringPadding(130, 25);
-    	greetingLabel.setStringColor(labelColor);
-    	super.addNewLabel(greetingLabel);
+        greetingLabel = new RATLabel(10, 10, 400, 50, labelBackground);
+        greetingLabel.setString(greetingString);
+        greetingLabel.setStringPadding(130, 25);
+        greetingLabel.setStringColor(labelColor);
+        super.addNewLabel(greetingLabel);
 
-    	//add 3 buttons Deutsch English Francais
-    	RATButton deutschButton = new RATButton(10, 80, buttonWidth, buttonHeight, buttonColor, "Deutsch");
-    	deutschButton.setString("Greeting in Deutsch");
-    	deutschButton.setStringPadding(100, 20);
-    	deutschButton.setStringColor(buttonStringColor);
-    	deutschButton.addListener(new LanguageClickListener());
-    	super.addNewButton(deutschButton);
+        //add 3 buttons Deutsch English Francais
+        int lastY = 30;
+        for(String language:languages){
+            lastY += 50;
+            RATButton languageButton = new RATButton(10, lastY, buttonWidth, buttonHeight, buttonColor, language);
+            languageButton.setString("Greeting in " + language);
+            languageButton.setStringPadding(100, 20);
+            languageButton.setStringColor(buttonStringColor);
+            languageButton.addListener(new LanguageClickListener());
+            super.addNewButton(languageButton);
+        }
 
-    	RATButton englishButton = new RATButton(10, 130, buttonWidth, buttonHeight, buttonColor, "English");
-    	englishButton.setString("Greeting in English");
-    	englishButton.setStringPadding(100, 20);
-    	englishButton.setStringColor(buttonStringColor);
-		englishButton.addListener(new LanguageClickListener());
-    	super.addNewButton(englishButton);
-
-    	RATButton francaisButton = new RATButton(10, 180, buttonWidth, buttonHeight, buttonColor, "Francais");
-    	francaisButton.setString("Greeting in Francais");
-    	francaisButton.setStringPadding(100, 20);
-    	francaisButton.setStringColor(buttonStringColor);
-		francaisButton.addListener(new LanguageClickListener());
-    	super.addNewButton(francaisButton);
-
-    	//add close button
-    	RATButton closeButton = new RATButton(10, 250, buttonWidth, buttonHeight, Color.RED, "Close");
-    	closeButton.setString("Close this window");
-    	closeButton.setStringPadding(100, 20);
-    	closeButton.setStringColor(buttonStringColor);
-		closeButton.addListener(new LanguageClickListener());
-    	super.addNewButton(closeButton);
+        //add close button
+        closeButton = new RATButton(10, lastY + 70, buttonWidth, buttonHeight, Color.RED, "close");
+        closeButton.setString("Close this window");
+        closeButton.setStringPadding(100, 20);
+        closeButton.setStringColor(buttonStringColor);
+        closeButton.addListener(new ExitClickListener());
+        super.addNewButton(closeButton);
     }
 
     private class LanguageClickListener implements RATMouseListener{
       public void mouseClicked(RATButton ratButton) {
-         String command = ratButton.getValue();
-         System.out.println("RAT Hello World Button clicked!");
-         System.out.println(command);
+        String command = ratButton.getValue();
+        System.out.println("RAT Hello World Button clicked!");
+        System.out.println(command);
+  		if (command.equals("English")){
+			greetingLabel.setString("Good day!");
+            closeButton.setString("End");
+		}
+	  	else
+		if(command.equals("Deutsch")){
+			greetingLabel.setString("Guten Tag!");
+            closeButton.setString("Beenden");
+		}
+	  	else
+		if(command.equals("Francais"))	{
+			greetingLabel.setString("Bonne journee!");
+            closeButton.setString("Terminé");
+		}
+        else{
+           greetingLabel.setString("Invalid input");
+           closeButton.setString("Invalid input");
+        }
 
+      }
+   }
 
-		  		if (command.equals("English")){
-					greetingLabel.setString("Good day!");
-				}
-			  	else
-				if(command.equals("Deutsch")){
-					greetingLabel.setString("Guten Tag!");
-				}
-			  	else
-				if(command.equals("Francais"))	{
-					greetingLabel.setString("Bonne journee!");
-				}
-
-				else
-				if(command.equals("Close")) {
-					ws.getListWindows().remove(parentWindow);
-					}
-
-
-
+   private class ExitClickListener implements RATMouseListener{
+      public void mouseClicked(RATButton e){
+        //remove window from window system
+        ws.getListWindows().remove(parentWindow);
       }
    }
 }

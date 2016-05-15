@@ -10,8 +10,6 @@ public abstract class RATWidget {
 	//RAT components list
     private List<RATButton> ratButtons;
     private List<RATLabel> ratLabels;
-
-
     private SimpleWindow parentWindow;
 
     public RATWidget(SimpleWindow parentWindow){
