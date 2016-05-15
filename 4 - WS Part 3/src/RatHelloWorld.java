@@ -3,6 +3,12 @@ import java.awt.Color;
 public class RatHelloWorld extends RATWidget {
 
 	private String greetingString = "Good Day";
+	private RATLabel greetingLabel;
+	private SimpleWindow parentWindow;
+	private WindowSystem ws;
+
+
+
 	private final Color labelColor = Color.BLACK;
 	private final Color labelBackground = new Color(0,0,0,0);
 	private final Color buttonColor = Color.GRAY;
@@ -10,12 +16,14 @@ public class RatHelloWorld extends RATWidget {
 	private int buttonWidth = 310;
 	private int buttonHeight = 30;
 
-	public RatHelloWorld(SimpleWindow parentWindow){
+	public RatHelloWorld(SimpleWindow parentWindow, WindowSystem ws){
     	//super constructor
     	super(parentWindow);
+		this.parentWindow = parentWindow;
+		this.ws = ws;
 
     	//create new label
-    	RATLabel greetingLabel = new RATLabel(10, 10, 400, 50, labelBackground);
+		greetingLabel = new RATLabel(10, 10, 400, 50, labelBackground);
     	greetingLabel.setString(greetingString);
     	greetingLabel.setStringPadding(130, 25);
     	greetingLabel.setStringColor(labelColor);
@@ -44,20 +52,40 @@ public class RatHelloWorld extends RATWidget {
     	super.addNewButton(francaisButton);
 
     	//add close button
-    	RATButton closeButton = new RATButton(10, 250, buttonWidth, buttonHeight, Color.RED, "close");
+    	RATButton closeButton = new RATButton(10, 250, buttonWidth, buttonHeight, Color.RED, "Close");
     	closeButton.setString("Close this window");
     	closeButton.setStringPadding(100, 20);
     	closeButton.setStringColor(buttonStringColor);
+		closeButton.addListener(new LanguageClickListener());
     	super.addNewButton(closeButton);
     }
 
     private class LanguageClickListener implements RATMouseListener{
-      public void mouseClicked(RATButton ratButton, WindowSystem ws) {
+      public void mouseClicked(RATButton ratButton) {
          String command = ratButton.getValue();
-         System.out.println("RAT Hello World Button clicked!");  
+         System.out.println("RAT Hello World Button clicked!");
          System.out.println(command);
-         greetingString = "Test string";
-		  ws.requestRepaint();
+
+
+		  		if (command.equals("English")){
+					greetingLabel.setString("Good day!");
+				}
+			  	else
+				if(command.equals("Deutsch")){
+					greetingLabel.setString("Guten Tag!");
+				}
+			  	else
+				if(command.equals("Francais"))	{
+					greetingLabel.setString("Bonne journee!");
+				}
+
+				else
+				if(command.equals("Close")) {
+					ws.getListWindows().remove(parentWindow);
+					}
+
+
+
       }
    }
 }

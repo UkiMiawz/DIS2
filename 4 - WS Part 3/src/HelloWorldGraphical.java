@@ -13,7 +13,7 @@ public class HelloWorldGraphical{
 
         //create new simple window & set widget
         SimpleWindow newWindow = new SimpleWindow(0.2f, 0.1f, 330, 310, "Hello world and don't panic");
-        RatHelloWorld widget = new RatHelloWorld(newWindow);
+        RatHelloWorld widget = new RatHelloWorld(newWindow, windowSystem);
         newWindow.setWidget(widget);
         windowSystem.addNewWindow(newWindow);
     }

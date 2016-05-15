@@ -11,6 +11,7 @@ public abstract class RATWidget {
     private List<RATButton> ratButtons;
     private List<RATLabel> ratLabels;
 
+
     private SimpleWindow parentWindow;
 
     public RATWidget(SimpleWindow parentWindow){
@@ -19,6 +20,7 @@ public abstract class RATWidget {
     	ratLabels = new ArrayList<RATLabel>();
         this.parentWindow = parentWindow;
         this.id = UUID.randomUUID();
+
     }
 
     //getter

@@ -89,6 +89,7 @@ public class WindowManager  {
 
     public void handleMouseClicked(int x, int y){
         System.out.println("Window manager - Mouse clicked with x " + x + " and y " + y);
+        //List<SimpleWindow> list = listWindows;
         
         if(currentActiveWindow == null){
             setActiveWindow(x,y);
@@ -96,6 +97,12 @@ public class WindowManager  {
         searchForActiveButton(x, y);
         searchForWidgetButton(x, y);
         currentActiveWindow = null;
+        //for (SimpleWindow: t
+        //     ) {redrawWindow(t);
+            
+        //}
+        windowSystem.requestRepaint();
+
     }
 
     public void handleMouseDragged(int x, int y){
@@ -232,7 +239,7 @@ public class WindowManager  {
                            && (componentTopY < y && y < componentBottomY))
                    {
                        System.out.println("RAT button found with value " + currentComponent.getValue());
-                       currentComponent.fireListeners(currentComponent,windowSystem);
+                       currentComponent.fireListeners(currentComponent);
                        break;   
                    }
                }    

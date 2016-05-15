@@ -27,10 +27,10 @@ public class RATButton extends RATLabel {
 		this.mouseListener.remove(mouseListener);
 	}
 
-	public void fireListeners(RATButton ratButton, WindowSystem ws){
+	public void fireListeners(RATButton ratButton){
 		if (mouseListener.size()!=0){
 		for (RATMouseListener mlist:mouseListener) {
-			mlist.mouseClicked(ratButton,ws);}
+			mlist.mouseClicked(ratButton);}
 		}
 	}
 
