@@ -23,6 +23,7 @@ public class Ratulator extends RATWidget {
 	private int startX = 20;
 	private int startY = 10;
 	private int buttonPerRow = 3;
+	private int inputLimit = 15;
 
     private double labelRatio = 0.8;
 
@@ -119,8 +120,10 @@ public class Ratulator extends RATWidget {
         //screen empty, start with new number
         if(numberString.equals("0") || lastOperator.equals("="))
             numberString = command;
-        else
-            numberString += command;
+        else{
+        	if(numberString.length() < inputLimit)
+            	numberString += command;
+        }
         numberLabel.setString(numberString);
       }     
    }
